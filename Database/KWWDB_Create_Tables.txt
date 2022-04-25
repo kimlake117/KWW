@@ -1,0 +1,17 @@
+CREATE TABLE user (user_id INTEGER PRIMARY KEY, user_name TEXT, email TEXT, password TEXT);
+
+CREATE TABLE product (product_id INTEGER PRIMARY KEY,product_name TEXT,photo TEXT,product_price REAL,description TEXT);
+
+CREATE TABLE user_cart (user_id INTEGER, product_id INTEGER, quantity INTEGER, FOREIGN KEY (user_id) REFERENCES user (user_id),FOREIGN KEY (product_id) REFERENCES product (product_id));
+
+CREATE TABLE order_status (order_status_id INTEGER PRIMARY KEY,order_status_description TEXT);
+
+CREATE TABLE state (state_id INTEGER PRIMARY KEY, state_name TEXT);
+
+CREATE TABLE order_detail (order_detail_id INTEGER PRIMARY KEY,parent_order_id INTEGER,product_id INTEGER,quantity INTEGER,FOREIGN KEY (product_id) REFERENCES product(product_id));
+
+CREATE TABLE parent_order (parent_order_id INTEGER PRIMARY KEY,order_detail_id INTEGER,user_id INTEGER,order_status_id INTEGER,shipping_detail_id INTEGER,billing_detail_id INTEGER,toal_order_cost REAL, order_date TEXT, status_date TEXT, FOREIGN KEY (order_detail_id) REFERENCES order_detail(order_detail_id),FOREIGN KEY (user_id) REFERENCES user(user_id), FOREIGN KEY (order_status_id) REFERENCES order_status(order_status_id),FOREIGN KEY(shipping_detail_id) REFERENCES shipping_detail(shipping_detail_id),FOREIGN KEY (billing_detail_id) REFERENCES billing_detail(billing_detail_id));
+							
+CREATE TABLE shipping_detail (shipping_detail_id INTEGER PRIMARY KEY, parent_order_id INTEGER, shipping_name TEXT, shipping_street_address TEXT,shipping_city TEXT,shipping_state INTEGER, shipping_postal_code INTEGER,FOREIGN KEY (shipping_state) REFERENCES state(state_id));
+
+CREATE TABLE billing_detail (billing_detail_id INTEGER PRIMARY KEY,parent_order_id INTEGER, billing_street_address TEXT,billing_city TEXT,billing_state INTEGER,billing_postal_code INTEGER, cc_number INTEGER, cc_exp_month INTEGER,cc_exp_year INTEGER,cc_cvc INTEGER,FOREIGN KEY (billing_state) REFERENCES state(state_id));

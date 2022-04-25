@@ -1,0 +1,4 @@
+INSERT INTO order_status(order_status_description) VALUES("New");
+INSERT INTO order_status(order_status_description) VALUES("Shipped");
+INSERT INTO order_status(order_status_description) VALUES("On Hold");
+INSERT INTO order_status(order_status_description) VALUES("Closed");

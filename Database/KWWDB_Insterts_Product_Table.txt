@@ -1,0 +1,1 @@
+INSERT INTO order_status(product_name,product_price,description) VALUES("Picture Frame",80.00,"Nine inch by eleven inch picture frame. Walnut with mapple splines and finished in oil.");
