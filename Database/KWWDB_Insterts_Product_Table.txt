@@ -1,4 +1,4 @@
-INSERT INTO order_status(product_name,product_price,description) VALUES("Picture Frame",80.00,"Nine inch by eleven inch picture frame. Walnut with mapple splines and finished in oil.");
-INSERT INTO order_status(product_name,product_price,description) VALUES("Cutting Board",120.00,"Eleven inch by nine inch by one inch end grain cutting board. Maple and walnut, finished in food safe oil.");
-INSERT INTO order_status(product_name,product_price,description) VALUES("Drink Coasters",35.00,"Set of 5 coasters. Purple heart and cedar.");
-INSERT INTO order_status(product_name,product_price,description) VALUES("End Table",220.00,"Made from oak and finished with water based poly.");
+INSERT INTO product(product_name,product_price,description) VALUES("Picture Frame",80.00,"Nine inch by eleven inch picture frame. Walnut with mapple splines and finished in oil.");
+INSERT INTO product(product_name,product_price,description) VALUES("Cutting Board",120.00,"Eleven inch by nine inch by one inch end grain cutting board. Maple and walnut, finished in food safe oil.");
+INSERT INTO product(product_name,product_price,description) VALUES("Drink Coasters",35.00,"Set of 5 coasters. Purple heart and cedar.");
+INSERT INTO product(product_name,product_price,description) VALUES("End Table",220.00,"Made from oak and finished with water based poly.");
