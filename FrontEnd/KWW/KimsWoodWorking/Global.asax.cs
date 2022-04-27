@@ -20,7 +20,12 @@ namespace KimsWoodWorking
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        public static string UserName { get; set; } = "Account";            
+
+        //used to set the name of the user in the nav bar
+        public static string UserName { get; set; } = "Account";
+
+        //to be set to either 'Log In' or 'Log Out' in the nav bar 
+        public static string LogInOut { get; set; } = "Log In";
     }
 }
 

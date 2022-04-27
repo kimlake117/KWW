@@ -27,8 +27,8 @@
                             @global_asax.UserName
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Log In</a></li>
-                            <li><a class="dropdown-item" href="#">View Cart</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("LogIn","Account")">@global_asax.LogInOut</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("ViewCart","Account")">View Cart</a></li>
                             <li><a class="dropdown-item" href="#">View Orders</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Account Settings</a></li>
