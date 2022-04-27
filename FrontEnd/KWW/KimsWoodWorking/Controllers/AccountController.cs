@@ -28,5 +28,16 @@ namespace KimsWoodWorking.Controllers
 
             return View(testList);
         }
+
+        public ActionResult ViewOrders() { 
+        
+            return View();
+        }
+
+        public ActionResult Settings()
+        {
+
+            return View();
+        }
     }
 }
