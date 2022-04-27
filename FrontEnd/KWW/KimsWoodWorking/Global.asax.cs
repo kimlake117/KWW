@@ -19,5 +19,8 @@ namespace KimsWoodWorking
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        public static string UserName { get; set; } = "Account";            
     }
 }
+
