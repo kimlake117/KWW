@@ -29,6 +29,9 @@ namespace KimsWoodWorking
             }
         }
 
+        //converts the database version of user cart to a more useful version
+        //in the database the product is a product id. but in the converted front end model,
+        //the product is a product model. so we can use its attributes easier. 
         private static List<UserCartItemModel> convertUserCartItem(List<rawUserCartItem> input) {
 
             List<UserCartItemModel> result = new List<UserCartItemModel>();
@@ -66,6 +69,20 @@ namespace KimsWoodWorking
                 }
             }
             return result;
+        }
+
+        //returns the total dollar amount of the users cart
+        public static double UserCartTotalValue() {
+            List<UserCartItemModel> UserCart = getUserCart();
+
+            double total = 0.0;
+
+            foreach (UserCartItemModel item in UserCart) { 
+                double quantityTotal = item.quantity * item.Product.product_price;
+
+                total = total + quantityTotal;
+            }
+            return total;
         }
 
         private class rawUserCartItem{
