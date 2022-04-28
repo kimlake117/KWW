@@ -216,6 +216,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountSecurityController.cs" />
+    <Compile Include="Controllers\CheckOutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -312,6 +313,7 @@
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Account\ViewCart.cshtml" />
+    <Content Include="Views\CheckOut\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

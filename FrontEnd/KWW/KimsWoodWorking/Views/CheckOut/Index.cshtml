@@ -1,0 +1,44 @@
+﻿@model IEnumerable<KimsWoodWorking.Models.UserCartItemModel>
+
+@{
+    ViewBag.Title = "Check Out";
+}
+
+<h2>Check Out</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.product_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.product_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+<br>
+<p>Total Price: $@ViewBag.TotalCartPrice</p>
+
+<!--TODO create form to take personal information for checkout process.-->
