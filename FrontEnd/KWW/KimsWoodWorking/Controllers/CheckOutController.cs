@@ -20,5 +20,9 @@ namespace KimsWoodWorking.Controllers
 
             return View(userCart); 
         }
+
+        public ActionResult a() { 
+            return View();
+        }
     }
 }
