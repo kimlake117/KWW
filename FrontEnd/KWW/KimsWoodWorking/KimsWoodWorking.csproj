@@ -226,9 +226,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\UserCartItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="SqliteDataAccess.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -306,10 +308,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\LogIn.cshtml" />
-    <Content Include="Views\Account\ViewCart.cshtml" />
     <Content Include="Views\Account\ViewOrders.cshtml" />
     <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Account\ViewCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

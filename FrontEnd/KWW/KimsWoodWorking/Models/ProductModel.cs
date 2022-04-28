@@ -7,14 +7,15 @@ namespace KimsWoodWorking.Models
 {
     public class ProductModel
     {
-        public int Product_Id { get; set; }
+        public int product_id { get; set; }
 
-        public string ProductName { get; set; }
+        public string product_name { get; set; }
 
-        public string PhotoPath { get; set; }
+        //path to the photo
+        public string photo { get; set; }
 
-        public double ProductPrice { get; set; }
+        public double product_price { get; set; }
 
-        public string ProductDescription { get; set; }
+        public string description { get; set; }
     }
 }

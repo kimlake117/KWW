@@ -22,11 +22,9 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult ViewCart()
         {
-            List<ProductModel> testList = new List<ProductModel>();
+            List<UserCartItemModel> userCart = SqliteDataAccess.getUserCart();
 
-            testList.Add(new ProductModel { Product_Id = 1, ProductName = "Picture Frame", ProductDescription = "for displaying pictures", ProductPrice = 350 });
-
-            return View(testList);
+            return View(userCart);
         }
 
         public ActionResult ViewOrders() { 

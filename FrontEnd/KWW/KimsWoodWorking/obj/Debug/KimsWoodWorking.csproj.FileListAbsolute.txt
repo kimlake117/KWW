@@ -193,3 +193,5 @@ C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\Fro
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\obj\Debug\KimsWoodWorking.csproj.CopyComplete
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\obj\Debug\KimsWoodWorking.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\obj\Debug\KimsWoodWorking.pdb
+C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Dapper.dll
+C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Dapper.xml

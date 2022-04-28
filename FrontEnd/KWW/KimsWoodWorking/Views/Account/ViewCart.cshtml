@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KimsWoodWorking.Models.ProductModel>
+﻿@model IEnumerable<KimsWoodWorking.Models.UserCartItemModel>
 
 @{
     ViewBag.Title = "ViewCart";
@@ -6,23 +6,16 @@
 
 <h2>ViewCart</h2>
 
-
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Product_Id)
+            @Html.DisplayNameFor(model => model.Product.product_name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.DisplayNameFor(model => model.Product.product_price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhotoPath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductDescription)
+            @Html.DisplayNameFor(model => model.quantity)
         </th>
         <th></th>
     </tr>
@@ -30,22 +23,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Product_Id)
+            @Html.DisplayFor(modelItem => item.Product.product_name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
+            @Html.DisplayFor(modelItem => item.Product.product_price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PhotoPath)
+            @Html.DisplayFor(modelItem => item.quantity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }
