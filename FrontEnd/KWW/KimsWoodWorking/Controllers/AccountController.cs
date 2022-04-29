@@ -42,5 +42,9 @@ namespace KimsWoodWorking.Controllers
 
             return View();
         }
+
+        public ActionResult SignUp() {
+            return View();
+        }
     }
 }

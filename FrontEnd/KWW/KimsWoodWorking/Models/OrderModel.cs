@@ -31,6 +31,7 @@ namespace KimsWoodWorking.Models
         public int shipping_state { get; set; }
 
         [Display(Name = "Shipping Postal Code")]
+        [DataType(DataType.PostalCode)]
         [Required(ErrorMessage = "This Field is required.")]
         public int shipping_postal_code { get; set; }
 
@@ -55,6 +56,7 @@ namespace KimsWoodWorking.Models
         public int billing_state { get; set; }
 
         [Display(Name = "Billing Postal Code")]
+        [DataType(DataType.PostalCode)]
         [Required(ErrorMessage = "This Field is required.")]
         public int billing_postal_code { get; set; }
 
