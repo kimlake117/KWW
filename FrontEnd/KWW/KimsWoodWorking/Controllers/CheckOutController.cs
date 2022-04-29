@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
+using KimsWoodWorking.BusinessLogic;
 
 namespace KimsWoodWorking.Controllers
 {
@@ -12,9 +13,9 @@ namespace KimsWoodWorking.Controllers
         // GET: CheckOut
         public ActionResult Index()
         {
-            List<UserCartItemModel> userCart = SqliteDataAccess.getUserCart();
+            List<UserCartItemModel> userCart = UserCart.getUserCart();
 
-            double total = SqliteDataAccess.UserCartTotalValue();
+            double total = UserCart.UserCartTotalValue();
 
             ViewBag.TotalCartPrice = total;
 

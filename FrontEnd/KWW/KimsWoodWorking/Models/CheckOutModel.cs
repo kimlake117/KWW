@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KimsWoodWorking.Models
 {
-    public class OrderModel
+    public class CheckOutModel
     {
         [Display(Name ="First Name")]
         [Required(ErrorMessage ="This Field is required.")]

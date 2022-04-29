@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
+using KimsWoodWorking.BusinessLogic;
 
 
 namespace KimsWoodWorking.Controllers
@@ -23,9 +24,9 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult ViewCart()
         {
-            List<UserCartItemModel> userCart = SqliteDataAccess.getUserCart();
+            List<UserCartItemModel> userCart = UserCart.getUserCart();
 
-            double total = SqliteDataAccess.UserCartTotalValue();
+            double total = UserCart.UserCartTotalValue();
 
             ViewBag.TotalCartPrice = total;
 
@@ -44,6 +45,17 @@ namespace KimsWoodWorking.Controllers
         }
 
         public ActionResult SignUp() {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(NewUserModel newUser)
+        {
+            if (ModelState.IsValid) { 
+                //do stuff here
+            }
+
             return View();
         }
     }
