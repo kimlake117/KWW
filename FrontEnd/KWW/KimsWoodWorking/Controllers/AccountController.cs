@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.BusinessLogic;
+using static KimsWoodWorking.BusinessLogic.UserAccount;
 
 
 namespace KimsWoodWorking.Controllers
@@ -52,8 +53,8 @@ namespace KimsWoodWorking.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SignUp(NewUserModel newUser)
         {
-            if (ModelState.IsValid) { 
-                //do stuff here
+            if (ModelState.IsValid) {
+                int recordsCreated = CreateNewUser(newUser.UserName,newUser.Email,newUser.Password);
             }
 
             return View();
