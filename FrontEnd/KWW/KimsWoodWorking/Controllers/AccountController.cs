@@ -12,7 +12,6 @@ namespace KimsWoodWorking.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account
         public ActionResult Index()
         {
             return View("LogIn");
