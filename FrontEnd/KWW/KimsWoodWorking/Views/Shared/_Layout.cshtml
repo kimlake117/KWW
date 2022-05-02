@@ -24,10 +24,10 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @global_asax.UserName
+                            @GlobalVariables.userName
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="@Url.Action("LogIn","Account")">@global_asax.LogInOut</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("LogIn","Account")">@GlobalVariables.logInOut</a></li>
                             <li><a class="dropdown-item" href="@Url.Action("ViewCart","Account")">View Cart</a></li>
                             <li><a class="dropdown-item" href="@Url.Action("ViewOrders","Account")">View Orders</a></li>
                             <li><hr class="dropdown-divider"></li>

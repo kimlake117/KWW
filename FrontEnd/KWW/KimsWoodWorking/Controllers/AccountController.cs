@@ -8,6 +8,7 @@ using KimsWoodWorking.BusinessLogic;
 using static KimsWoodWorking.BusinessLogic.UserAccount;
 
 
+
 namespace KimsWoodWorking.Controllers
 {
     public class AccountController : Controller
@@ -19,7 +20,34 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult LogIn()
         {
-            return View();
+            if (GlobalVariables.logInOut == "Log Out") {
+
+
+                GlobalVariables.userName = "Account";
+                GlobalVariables.CurrentUser = new UserModel();
+                GlobalVariables.logInOut = "Log In";
+
+                return View("~/Views/Home/Index.cshtml");
+            }
+            else {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(UserModel user)
+        {
+            if (ModelState.IsValid) {
+                if (UserAccount.pwMatch(user)) {
+
+                    GlobalVariables.logInOut = "Log Out";
+                    GlobalVariables.userName = user.UserName;
+                    GlobalVariables.CurrentUser = user;
+
+                    return View("~/Views/Home/Index.cshtml");
+                }
+            }
+            return View("invalidLogIn");
         }
 
         public ActionResult ViewCart()
