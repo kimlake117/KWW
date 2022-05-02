@@ -8,6 +8,8 @@ namespace KimsWoodWorking.Models
 {
     public class UserModel
     {
+        public int user_id { get; set; }
+
         [Required(ErrorMessage = "User name is required.")]
         [Display(Name = "User Name")]
         public String UserName { get; set; }
@@ -20,5 +22,7 @@ namespace KimsWoodWorking.Models
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public String Email { get; set; }
+
+        public Boolean isSignedIn { get; set; } = false;
     }
 }

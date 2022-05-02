@@ -8,11 +8,15 @@ namespace KimsWoodWorking
 {
     public static class GlobalVariables
     {
-        public static UserModel CurrentUser { get; set; }
+        public static int CurrentUser_id { get; set; }
+
+        public static string CurrentUser_Name { get; set; } = "Account";
+
+        public static string CurrentUser_Email { get; set; }
+
+        public static bool isSignedIn { get; set; } = false;
 
         public static string logInOut { get; set; } = "log In";
-
-        public static string userName { get; set; } = "Account";
 
     }
 }

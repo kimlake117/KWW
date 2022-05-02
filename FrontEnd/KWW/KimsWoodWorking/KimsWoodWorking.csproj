@@ -195,12 +195,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\databaseModels\ProductDBModel.cs" />
     <Compile Include="Models\databaseModels\UserCartDBModel.cs" />
     <Compile Include="Models\databaseModels\UserDBModel.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\CheckOutModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\UserCartItemModel.cs" />

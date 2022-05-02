@@ -72,5 +72,13 @@ namespace KimsWoodWorking.BusinessLogic
 
         }
 
+        public static int getUserId(UserModel user) {
+            string sql = "select * from user where user_name = '" + user.UserName + "';";
+
+            List<UserDBModel> q_1 = SqliteDataAccess.LoadData<UserDBModel>(sql);
+
+            return q_1.First().user_id;
+        }
+
     }
 }

@@ -7,6 +7,8 @@ namespace KimsWoodWorking.Models.databaseModels
 {
     public class UserDBModel
     {
+        public int user_id { get; set; }
+
         public String UserName { get; set; }
 
         public String Password { get; set; }

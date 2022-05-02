@@ -11,7 +11,7 @@ namespace KimsWoodWorking.BusinessLogic
     {
         public static List<UserCartItemModel> getUserCart() {
 
-            string sql = @"select * from user_cart";
+            string sql = @"select * from user_cart where user_id = "+GlobalVariables.CurrentUser_id+";";
 
             List<UserCartDBModel> q1_results = SqliteDataAccess.LoadData<UserCartDBModel>(sql);
 

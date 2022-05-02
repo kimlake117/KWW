@@ -23,9 +23,12 @@ namespace KimsWoodWorking.Controllers
             if (GlobalVariables.logInOut == "Log Out") {
 
 
-                GlobalVariables.userName = "Account";
-                GlobalVariables.CurrentUser = new UserModel();
+                GlobalVariables.CurrentUser_Name = "Account";
                 GlobalVariables.logInOut = "Log In";
+                GlobalVariables.isSignedIn = false;
+                GlobalVariables.CurrentUser_id = -1;
+                GlobalVariables.CurrentUser_Email = "";
+
 
                 return View("~/Views/Home/Index.cshtml");
             }
@@ -41,8 +44,10 @@ namespace KimsWoodWorking.Controllers
                 if (UserAccount.pwMatch(user)) {
 
                     GlobalVariables.logInOut = "Log Out";
-                    GlobalVariables.userName = user.UserName;
-                    GlobalVariables.CurrentUser = user;
+                    GlobalVariables.isSignedIn = true;
+                    GlobalVariables.CurrentUser_Email=user.Email;
+                    GlobalVariables.CurrentUser_Name = user.UserName;
+                    GlobalVariables.CurrentUser_id = UserAccount.getUserId(user);
 
                     return View("~/Views/Home/Index.cshtml");
                 }
@@ -52,13 +57,19 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult ViewCart()
         {
-            List<UserCartItemModel> userCart = UserCart.getUserCart();
+            if (GlobalVariables.isSignedIn) {
 
-            double total = UserCart.UserCartTotalValue();
+                List<UserCartItemModel> userCart = UserCart.getUserCart();
 
-            ViewBag.TotalCartPrice = total;
+                double total = UserCart.UserCartTotalValue();
 
-            return View(userCart);
+                ViewBag.TotalCartPrice = total;
+
+                return View(userCart);
+            }
+            else {
+                return Redirect("LogIn");
+            }
         }
 
         public ActionResult ViewOrders() { 
@@ -83,8 +94,15 @@ namespace KimsWoodWorking.Controllers
             if (ModelState.IsValid) {
                 int recordsCreated = CreateNewUser(newUser.UserName,newUser.Email,newUser.Password);
             }
+            UserModel user = new UserModel();
 
-            return View();
+            user.UserName = newUser.UserName;
+            user.Email = newUser.Email;
+            user.Password = newUser.Password;
+
+            LogIn(user);
+
+            return View("~/Views/Home/Index.cshtml");
         }
     }
 }
