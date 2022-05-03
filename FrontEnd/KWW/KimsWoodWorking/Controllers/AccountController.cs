@@ -38,6 +38,7 @@ namespace KimsWoodWorking.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogIn(UserModel user)
         {
             if (ModelState.IsValid) {
@@ -49,7 +50,11 @@ namespace KimsWoodWorking.Controllers
                     GlobalVariables.CurrentUser_Name = user.UserName;
                     GlobalVariables.CurrentUser_id = UserAccount.getUserId(user);
 
-                    return View("~/Views/Home/Index.cshtml");
+                    string redirectURL = GlobalVariables.attemptedAccessURL;
+
+                    GlobalVariables.attemptedAccessURL = "~/Home/Index";
+
+                    return Redirect(redirectURL);
                 }
             }
             return View("invalidLogIn");
@@ -68,6 +73,7 @@ namespace KimsWoodWorking.Controllers
                 return View(userCart);
             }
             else {
+                GlobalVariables.attemptedAccessURL = "~/Account/ViewCart";
                 return Redirect("LogIn");
             }
         }
@@ -79,10 +85,76 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult Settings()
         {
-
-            return View();
+            if (GlobalVariables.isSignedIn)
+            {
+                return View();
+            }
+            else
+            {
+                GlobalVariables.attemptedAccessURL = "~/Account/Settings";
+                return Redirect("LogIn");
+            }    
         }
 
+        public ActionResult ChangePassword()
+        {
+            if (GlobalVariables.isSignedIn)
+            {
+                return View();
+            }
+            else
+            {
+                GlobalVariables.attemptedAccessURL = "~/Account/ChangePassword";
+                return Redirect("LogIn");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ModifyUserModel changes)
+        {
+                UserAccount.UpdateUserPassword(changes.Password);
+                @ViewBag.Message = "Account Change was a success.";
+                return View("PostAccountChange");          
+        }
+        public ActionResult ChangeEmail()
+        {
+
+            if (GlobalVariables.isSignedIn)
+            {
+                return View();
+            }
+            else
+            {
+                GlobalVariables.attemptedAccessURL = "~/Account/ChangeEmail";
+                return Redirect("LogIn");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeEmail(ModifyUserModel changes) {
+
+            UserAccount.UpdateUserEmail(changes.Email);
+            @ViewBag.Message = "Account Change was a success.";
+            return View("PostAccountChange");
+        }
+        public ActionResult DeleteAccount()
+        {
+            if (GlobalVariables.isSignedIn)
+            {
+                return View();
+            }
+            else
+            {
+                GlobalVariables.attemptedAccessURL = "~/Account/DeleteAccount";
+                return Redirect("LogIn");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAccount(int user_id) {
+            @ViewBag.Message = "Account Change was a success.";
+            return View("PostAccountChange");
+        }
         public ActionResult SignUp() {
             return View();
         }

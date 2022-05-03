@@ -199,6 +199,7 @@
     <Compile Include="Models\databaseModels\UserCartDBModel.cs" />
     <Compile Include="Models\databaseModels\UserDBModel.cs" />
     <Compile Include="Models\CheckOutModel.cs" />
+    <Compile Include="Models\ModifyUserModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\UserCartItemModel.cs" />
     <Compile Include="Models\NewUserModel.cs" />
@@ -261,13 +262,17 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\ViewOrders.cshtml" />
-    <Content Include="Views\Account\Settings.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Account\ViewCart.cshtml" />
     <Content Include="Views\CheckOut\Index.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Account\invalidLogIn.cshtml" />
+    <Content Include="Views\Account\Settings.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangeEmail.cshtml" />
+    <Content Include="Views\Account\PostAccountChange.cshtml" />
+    <Content Include="Views\Account\DeleteAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

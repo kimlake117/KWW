@@ -24,6 +24,27 @@ namespace KimsWoodWorking.BusinessLogic
             return SqliteDataAccess.SaveData(sql, userDBModel);
         }
 
+        public static int UpdateUserEmail(string newEmail) {
+            UserDBModel userDBModel =new UserDBModel();
+
+            userDBModel.UserName = GlobalVariables.CurrentUser_Name;
+            userDBModel.Email = newEmail;
+            string sql = "update user set email = @email where user_name = @UserName";
+
+            return SqliteDataAccess.SaveData(sql, userDBModel);
+        }
+
+        public static int UpdateUserPassword(string newPassword) {
+            UserDBModel userDBModel =new UserDBModel();
+
+            userDBModel.Password = HashPassword(newPassword);
+            userDBModel.UserName = GlobalVariables.CurrentUser_Name;
+
+            string sql = "update user set password = @Password where user_name = @UserName";
+
+            return SqliteDataAccess.SaveData(sql, userDBModel);
+        }
+
         private static string HashPassword(string pw)
         {
             string salt = "a4fgep57Vs2Q";

@@ -16,7 +16,9 @@ namespace KimsWoodWorking
 
         public static bool isSignedIn { get; set; } = false;
 
-        public static string logInOut { get; set; } = "log In";
+        public static string logInOut { get; set; } = "Log In";
+
+        public static string attemptedAccessURL { get; set; } = "~/Home/Index";
 
     }
 }
