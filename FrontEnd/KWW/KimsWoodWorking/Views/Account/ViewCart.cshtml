@@ -9,10 +9,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Product.product_name)
+            @Html.DisplayNameFor(model => model.product_name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.product_price)
+            @Html.DisplayNameFor(model => model.product_price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.quantity)
@@ -20,25 +20,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.product_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.product_price)
-        </td>
-        <td>
-            @Html.EditorFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "DeleteCartItem", new { id = item.Id, product = item.Product.product_id })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product_price)
+            </td>
+            <td>
+              @using (Html.BeginForm("updateCartItem", "Account", FormMethod.Post))
+              {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => item.user_Id)
+                    @Html.HiddenFor(model => item.product_id)
+                    @Html.EditorFor(model => item.quantity)
+                    <button type="submit">Update</button>
+              }
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteCartItem", new { id = item.user_Id, product = item.product_id })
 
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 </table>
 <br>
 <p>Total Price: $@ViewBag.TotalCartPrice</p>
 <input type="submit" onclick="location.href='@Url.Action("Index","CheckOut")'" value="Check out" />
-<input type="submit" onclick="location.href='@Url.Action("Index","Products")'" value ="Back to browse" />
+<input type="submit" onclick="location.href='@Url.Action("Index","Products")'" value="Back to browse" />

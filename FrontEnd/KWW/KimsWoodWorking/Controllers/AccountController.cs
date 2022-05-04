@@ -111,9 +111,15 @@ namespace KimsWoodWorking.Controllers
             return View();
         }
 
-        public ActionResult DeleteCartItem(DeleteCartItemModel item) {
+        public ActionResult DeleteCartItem(EditCartItemModel item) {
 
             UserCart.deleteCartItem(item.Id,item.product);
+            return Redirect("~/Account/ViewCart");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult updateCartItem(UserCartItemModel item) {
+            UserCart.updateCartItem(item.user_Id, item.product_id, item.quantity);
             return Redirect("~/Account/ViewCart");
         }
 
