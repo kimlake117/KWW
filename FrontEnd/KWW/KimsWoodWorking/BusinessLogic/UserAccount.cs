@@ -28,7 +28,7 @@ namespace KimsWoodWorking.BusinessLogic
             UserDBModel userDBModel =new UserDBModel();
 
             userDBModel.UserName = GlobalVariables.CurrentUser_Name;
-            userDBModel.Email = newEmail;
+            userDBModel.Email = newEmail; 
             string sql = "update user set email = @email where user_name = @UserName";
 
             return SqliteDataAccess.SaveData(sql, userDBModel);

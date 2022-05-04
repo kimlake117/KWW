@@ -28,5 +28,12 @@ namespace KimsWoodWorking
                 return conn.Execute(sql,data);
             }
         }
+
+        public static int executeStatment(string sql) {
+            using (IDbConnection conn = new SQLiteConnection(LoadConnectionString()))
+            {
+                return conn.Execute(sql);
+            }
+        }
     }
 }

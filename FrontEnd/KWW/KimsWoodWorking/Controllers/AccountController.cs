@@ -13,16 +13,20 @@ namespace KimsWoodWorking.Controllers
 {
     public class AccountController : Controller
     {
+
+//**********************Login and sign up**********************************************
         public ActionResult Index()
         {
             return View("LogIn");
         }
 
+        //this handles both loging in and loggin out
         public ActionResult LogIn()
         {
+            //if the user was already logged in, then log them out
             if (GlobalVariables.logInOut == "Log Out") {
 
-
+                //reset global variables
                 GlobalVariables.CurrentUser_Name = "Account";
                 GlobalVariables.logInOut = "Log In";
                 GlobalVariables.isSignedIn = false;
@@ -32,6 +36,7 @@ namespace KimsWoodWorking.Controllers
 
                 return View("~/Views/Home/Index.cshtml");
             }
+            //if they where not logged in, return the login form
             else {
                 return View();
             }
@@ -59,7 +64,30 @@ namespace KimsWoodWorking.Controllers
             }
             return View("invalidLogIn");
         }
+        public ActionResult SignUp()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(NewUserModel newUser)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = CreateNewUser(newUser.UserName, newUser.Email, newUser.Password);
+            }
+            UserModel user = new UserModel();
+
+            user.UserName = newUser.UserName;
+            user.Email = newUser.Email;
+            user.Password = newUser.Password;
+
+            LogIn(user);
+
+            return View("~/Views/Home/Index.cshtml");
+        }
+        //**********************Cart and Orders********************************
         public ActionResult ViewCart()
         {
             if (GlobalVariables.isSignedIn) {
@@ -83,6 +111,13 @@ namespace KimsWoodWorking.Controllers
             return View();
         }
 
+        public ActionResult DeleteCartItem(DeleteCartItemModel item) {
+
+            UserCart.deleteCartItem(item.Id,item.product);
+            return Redirect("~/Account/ViewCart");
+        }
+
+        //**********************Account settings********************************
         public ActionResult Settings()
         {
             if (GlobalVariables.isSignedIn)
@@ -155,26 +190,6 @@ namespace KimsWoodWorking.Controllers
             @ViewBag.Message = "Account Change was a success.";
             return View("PostAccountChange");
         }
-        public ActionResult SignUp() {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SignUp(NewUserModel newUser)
-        {
-            if (ModelState.IsValid) {
-                int recordsCreated = CreateNewUser(newUser.UserName,newUser.Email,newUser.Password);
-            }
-            UserModel user = new UserModel();
-
-            user.UserName = newUser.UserName;
-            user.Email = newUser.Email;
-            user.Password = newUser.Password;
-
-            LogIn(user);
-
-            return View("~/Views/Home/Index.cshtml");
-        }
+        
     }
 }

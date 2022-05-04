@@ -29,10 +29,11 @@
             @Html.DisplayFor(modelItem => item.Product.product_price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.quantity)
+            @Html.EditorFor(modelItem => item.quantity)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @Html.ActionLink("Delete", "DeleteCartItem", new { id = item.Id, product = item.Product.product_id })
+
         </td>
     </tr>
 }
