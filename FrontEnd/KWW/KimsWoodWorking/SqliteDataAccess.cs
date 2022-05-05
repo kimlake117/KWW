@@ -20,7 +20,7 @@ namespace KimsWoodWorking
             using (IDbConnection conn = new SQLiteConnection(LoadConnectionString())) {
                 return conn.Query<T>(sql).ToList();
             }
-        }
+        } 
 
         public static int SaveData<T>(string sql, T data) {
             using (IDbConnection conn = new SQLiteConnection(LoadConnectionString()))

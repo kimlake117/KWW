@@ -184,6 +184,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\OrderManager.cs" />
     <Compile Include="BusinessLogic\UserAccount.cs" />
     <Compile Include="BusinessLogic\UserCart.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -274,6 +275,9 @@
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Account\PostAccountChange.cshtml" />
     <Content Include="Views\Account\DeleteAccount.cshtml" />
+    <Content Include="Views\CheckOut\shipping_and_billing.cshtml" />
+    <Content Include="Views\CheckOut\OrderComplete.cshtml" />
+    <Content Include="Views\CheckOut\ErrorWithOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

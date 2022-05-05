@@ -4,15 +4,15 @@
     ViewBag.Title = "Check Out";
 }
 
-<h2>Check Out</h2>
+<h2>Confirm Cart to Check Out</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Product.product_name)
+            @Html.DisplayNameFor(model => model.product_name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Product.product_price)
+            @Html.DisplayNameFor(model => model.product_price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.quantity)
@@ -24,23 +24,23 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.product_name)
+                @Html.DisplayFor(modelItem => item.product_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.product_price)
+                <p>
+                    $@Html.DisplayFor(modelItem => item.product_price)
+                </p>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.quantity)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 </table>
 <br>
 <p>Total Price: $@ViewBag.TotalCartPrice</p>
-
+<input type="submit" onclick="location.href='@Url.Action("shipping_and_billing","CheckOut")'" value="To Shipping and Billing" />
+<input type="submit" onclick="location.href='@Url.Action("ViewCart","Account")'" value="Back to Cart" />
 
 
 <!--TODO create form to take personal information for checkout process.-->

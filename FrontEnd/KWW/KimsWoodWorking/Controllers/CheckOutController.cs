@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.BusinessLogic;
+using static KimsWoodWorking.BusinessLogic.UserCart;
+using static KimsWoodWorking.BusinessLogic.OrderManager;
 
 namespace KimsWoodWorking.Controllers
 {
@@ -13,17 +15,29 @@ namespace KimsWoodWorking.Controllers
         // GET: CheckOut
         public ActionResult Index()
         {
-            List<UserCartItemModel> userCart = UserCart.getUserCart();
+            List<UserCartItemModel> userCart = getUserCart();
 
-            double total = UserCart.UserCartTotalValue();
+            double total = UserCartTotalValue();
 
             ViewBag.TotalCartPrice = total;
 
-            return View(userCart); 
+            return View(userCart);
         }
 
-        public ActionResult a() { 
+        public ActionResult shipping_and_billing() {
             return View();
+        }
+
+        //this takes all the user info for an order and creates the order.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult shipping_and_billing(CheckOutModel com) {
+
+            if (ModelState.IsValid) {
+                createOrder(com);
+                return View("OrderComplete");
+            }
+            return View("ErrorWithOrder");
         }
     }
 }

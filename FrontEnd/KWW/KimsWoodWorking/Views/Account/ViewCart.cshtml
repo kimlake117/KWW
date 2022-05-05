@@ -27,7 +27,10 @@
                 @Html.DisplayFor(modelItem => item.product_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.product_price)
+                <p>
+                    $
+                    @Html.DisplayFor(modelItem => item.product_price)
+                </p>
             </td>
             <td>
               @using (Html.BeginForm("updateCartItem", "Account", FormMethod.Post))
