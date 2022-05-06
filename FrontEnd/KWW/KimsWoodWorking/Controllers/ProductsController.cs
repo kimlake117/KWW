@@ -12,6 +12,10 @@ namespace KimsWoodWorking.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            if (!GlobalVariables.isSignedIn)
+            {
+                GlobalVariables.attemptedAccessURL = "~/Home/Index";
+            }
             return View();
         }
     }

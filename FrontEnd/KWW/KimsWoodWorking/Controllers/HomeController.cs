@@ -12,6 +12,10 @@ namespace KimsWoodWorking.Controllers
         {
             ViewBag.Title = "Home Page";
 
+            if (!GlobalVariables.isSignedIn) {
+                GlobalVariables.attemptedAccessURL = "~/Home/Index";
+            }
+
             return View();
         }
     }
