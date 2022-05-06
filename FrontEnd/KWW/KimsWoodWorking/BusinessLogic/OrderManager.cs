@@ -91,12 +91,81 @@ namespace KimsWoodWorking.BusinessLogic
 
             
         }
+
+        public static List<OrderSummaryModel> getUserOrders() { 
+            //the final list that will be returned
+            List<OrderSummaryModel> orders = new List<OrderSummaryModel>();
+
+            string sql = @"select PO.parent_order_id,PO.total_order_cost,order_date, order_status_description, status_date, shipping_name, shipping_street_address, shipping_city,state_name, shipping_postal_code
+                            from parent_order PO INNER JOIN shipping_detail SD on PO.parent_order_id = SD.parent_order_id
+                            inner join order_status OS on OS.order_status_id = PO.order_status_id
+                            inner join state on state.state_id = SD.shipping_state
+                            where user_id = " + GlobalVariables.CurrentUser_id;
+
+            List<queryResult> queryResults = SqliteDataAccess.LoadData<queryResult>(sql);
+
+            //translate the query result list into ordersumarrymodel and add them to the final list
+            foreach (queryResult result in queryResults) { 
+                OrderSummaryModel orderSummaryModel = new OrderSummaryModel();
+
+                orderSummaryModel.parent_order_id = result.parent_order_id;
+                orderSummaryModel.total_order_cost = result.total_order_cost;
+                orderSummaryModel.order_date = result.order_date;
+                orderSummaryModel.order_status_description = result.order_status_description;
+                orderSummaryModel.status_date = result.status_date;
+                orderSummaryModel.shipping_name = result.shipping_name;
+                orderSummaryModel.shipping_street_address = result.shipping_street_address;
+                orderSummaryModel.shipping_city = result.shipping_city;
+                orderSummaryModel.shipping_state = result.state_name;
+                orderSummaryModel.shipping_postal_code = result.shipping_postal_code;
+
+                orders.Add(orderSummaryModel);
+            }
+
+            return orders;
+        }
+
+        public static List<OrderDetailItemModel> getOrderDetails(int PO) { 
+            //the final list to be returned
+            List<OrderDetailItemModel> orderDetails = new List<OrderDetailItemModel>();
+
+            string sql = @"select product_name,product_price,quantity
+                            from order_detail OD
+                            inner join product P on p.product_id = OD.product_id
+                            where parent_order_id = "+PO;
+
+            List<queryResult> queryResults = SqliteDataAccess.LoadData<queryResult>(sql);
+
+            //translate, add to list, and return
+            foreach (queryResult item in queryResults) {
+                OrderDetailItemModel orderDetailItemModel = new OrderDetailItemModel();
+
+                orderDetailItemModel.product_name = item.product_name;
+                orderDetailItemModel.product_price = item.product_price;
+                orderDetailItemModel.quantity = item.quantity;
+
+                orderDetails.Add(orderDetailItemModel);
+            }
+
+            return orderDetails;
+        }
         private class queryResult
         {
             public int parent_order_id { get; set; }
             public int shipping_detail_id { get; set; }
             public int billing_detail_id { get; set; }
-
+            public string order_date { get; set; }
+            public string order_status_description { get; set; }
+            public string status_date { get; set; }
+            public string shipping_name { get; set; }
+            public string shipping_street_address { get; set; }
+            public string shipping_city { get; set; }
+            public string state_name { get; set; }
+            public int shipping_postal_code { get; set; }
+            public double total_order_cost { get; set; }
+            public double product_price { get; set; }
+            public int quantity { get; set; }
+            public string product_name { get; set; }
         }
     }
 }

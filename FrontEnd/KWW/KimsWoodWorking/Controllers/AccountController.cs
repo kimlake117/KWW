@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.BusinessLogic;
 using static KimsWoodWorking.BusinessLogic.UserAccount;
+using static KimsWoodWorking.BusinessLogic.OrderManager;
 
 
 
@@ -106,9 +107,30 @@ namespace KimsWoodWorking.Controllers
             }
         }
 
-        public ActionResult ViewOrders() { 
-        
-            return View();
+        public ActionResult ViewOrders() {
+            if (GlobalVariables.isSignedIn)
+            {
+                List<OrderSummaryModel> userOrders = getUserOrders();
+                return View(userOrders);
+            }
+            else
+            {
+                GlobalVariables.attemptedAccessURL = "~/Account/ViewOrders";
+                return Redirect("LogIn");
+            }
+        }
+
+        public ActionResult ViewOrderDetails(int parent_order = -1) {
+            if (GlobalVariables.isSignedIn)
+            {
+                List<OrderDetailItemModel> orderDetails = getOrderDetails(parent_order);
+                return View(orderDetails);
+            }
+            else
+            {
+                GlobalVariables.attemptedAccessURL = "~/Account/ViewOrders";
+                return Redirect("LogIn");
+            }
         }
 
         public ActionResult DeleteCartItem(EditCartItemModel item) {

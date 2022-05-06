@@ -1,7 +1,86 @@
-﻿
+﻿@model IEnumerable<KimsWoodWorking.Models.OrderSummaryModel>
+
 @{
     ViewBag.Title = "ViewOrders";
 }
 
-<h2>ViewOrders</h2>
+<br />
+<h2>Orders for @GlobalVariables.CurrentUser_Name</h2>
 
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.parent_order_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_order_cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.order_status_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipping_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipping_street_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipping_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipping_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.shipping_postal_code)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.parent_order_id)
+        </td>
+        <td>
+            <p>
+                $@Html.DisplayFor(modelItem => item.total_order_cost)
+            </p>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.order_status_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipping_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipping_street_address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipping_city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipping_state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.shipping_postal_code)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "ViewOrderDetails", new { parent_order = item.parent_order_id }) 
+        </td>
+    </tr>
+}
+
+</table>

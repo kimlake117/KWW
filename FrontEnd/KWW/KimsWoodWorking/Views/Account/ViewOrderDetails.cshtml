@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KimsWoodWorking.Models.OrderDetailItemModel>
+
+@{
+    ViewBag.Title = "ViewOrderDetails";
+}
+
+<h2>Order Details</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            <p>
+                $@Html.DisplayFor(modelItem => item.product_price)
+            </p>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+    </tr>
+}
+
+</table>
