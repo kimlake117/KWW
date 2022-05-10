@@ -1,7 +1,48 @@
-﻿
+﻿@model IEnumerable<KimsWoodWorking.Models.ProductModel>
+
 @{
     ViewBag.Title = "Index";
 }
-
+<br />
 <h2>Products</h2>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th></th>
+    </tr>
 
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.photo)
+        </td>
+        <td>
+            <p>
+                $@Html.DisplayFor(modelItem => item.product_price)
+            </p>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.ActionLink("Add to Cart", "addToCart", new { productID = item.product_id})
+        </td>
+    </tr>
+}
+
+</table>

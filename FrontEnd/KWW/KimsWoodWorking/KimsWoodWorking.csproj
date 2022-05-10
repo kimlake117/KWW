@@ -185,6 +185,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\OrderManager.cs" />
+    <Compile Include="BusinessLogic\ProductManager.cs" />
     <Compile Include="BusinessLogic\UserAccount.cs" />
     <Compile Include="BusinessLogic\UserCart.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -266,7 +267,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Account\ViewCart.cshtml" />
     <Content Include="Views\CheckOut\Index.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
@@ -282,10 +282,10 @@
     <Content Include="Views\CheckOut\ErrorWithOrder.cshtml" />
     <Content Include="Views\Account\ViewOrders.cshtml" />
     <Content Include="Views\Account\ViewOrderDetails.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

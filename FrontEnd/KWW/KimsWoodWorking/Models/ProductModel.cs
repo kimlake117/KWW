@@ -15,12 +15,15 @@ namespace KimsWoodWorking.Models
         public string product_name { get; set; }
 
         //path to the photo
-        public string photo { get; set; }
+        [Display(Name = "Photo")]
+        public string photo { get; set; } = "";
 
         [Display(Name = "Product Price")]
         public double product_price { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
+
+        public int active { get; set; }
     }
 }

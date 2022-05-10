@@ -91,5 +91,24 @@ namespace KimsWoodWorking.BusinessLogic
 
             return SqliteDataAccess.executeStatment(sql,p);
         }
+
+        public static void addProductToCart(int productID) {
+            var p = new DynamicParameters();
+
+            p.Add("@ProductID",productID);
+            p.Add("@UserID", GlobalVariables.CurrentUser_id);
+
+            string sql = @"select * from user_cart where user_id = @UserID and product_id = @ProductID";
+
+            List<UserCartDBModel> checkForItem = SqliteDataAccess.LoadData<UserCartDBModel>(sql,p);
+
+            if (checkForItem.Count == 0) { 
+            
+                sql = @"insert into user_cart(user_id, product_id,quantity)
+                            values(@userID,@ProductID,1)";
+
+                SqliteDataAccess.executeStatment(sql, p);
+            }      
+        }
     }
 }

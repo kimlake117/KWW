@@ -15,7 +15,11 @@ namespace KimsWoodWorking.Models
         public int quantity { get; set; }
 
         public int product_id { get; set; }
+
+        [Display(Name = "Product Name")]
         public string product_name { get; set; }
+
+        [Display(Name = "Price")]
         public double product_price { get; set; }
         
 

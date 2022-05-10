@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using static KimsWoodWorking.BusinessLogic.UserCart;
-using KimsWoodWorking.Models.databaseModels;
 using KimsWoodWorking.Models;
 using Dapper;
 using System.Data.SQLite;

@@ -12,5 +12,6 @@ namespace KimsWoodWorking.Models.databaseModels
         public string photo { get; set; }
         public double product_price { get; set; }
         public string description { get; set; }
+        public int active { get; set; }
     }
 }
