@@ -5,6 +5,7 @@ using System.Web;
 using KimsWoodWorking.Models.databaseModels;
 using KimsWoodWorking.Models;
 using System.Security.Cryptography;
+using Dapper;
 
 namespace KimsWoodWorking.BusinessLogic
 {
@@ -71,9 +72,13 @@ namespace KimsWoodWorking.BusinessLogic
 
         public static Boolean pwMatch(UserModel user) {
 
-            string sql = "select * from user where user_name = '"+user.UserName+"';";
+            var p = new DynamicParameters();
 
-            List<UserDBModel> storedUser = SqliteDataAccess.LoadData<UserDBModel>(sql);
+            p.Add("@UserName", user.UserName);
+
+            string sql = "select * from user where user_name = @UserName;";
+
+            List<UserDBModel> storedUser = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
 
             //if there are no results in the query, return false
             if (storedUser.Count == 0) {
@@ -94,9 +99,14 @@ namespace KimsWoodWorking.BusinessLogic
         }
 
         public static int getUserId(UserModel user) {
-            string sql = "select * from user where user_name = '" + user.UserName + "';";
 
-            List<UserDBModel> q_1 = SqliteDataAccess.LoadData<UserDBModel>(sql);
+            var p = new DynamicParameters();
+
+            p.Add("@UserName",user.UserName);
+
+            string sql = "select * from user where user_name = @UserName;";
+
+            List<UserDBModel> q_1 = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
 
             return q_1.First().user_id;
         }

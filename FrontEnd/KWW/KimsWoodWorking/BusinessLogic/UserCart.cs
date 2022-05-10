@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using KimsWoodWorking.Models.databaseModels;
 using KimsWoodWorking.Models;
+using Dapper;
 
 namespace KimsWoodWorking.BusinessLogic
 {
@@ -11,10 +12,14 @@ namespace KimsWoodWorking.BusinessLogic
     {
         public static List<UserCartItemModel> getUserCart() {
 
-            string sql = @"select * from user_cart where user_id = "+GlobalVariables.CurrentUser_id+";";
+            var p = new DynamicParameters();
+
+            p.Add("@UserId", GlobalVariables.CurrentUser_id);
+
+            string sql = @"select * from user_cart where user_id = @UserId;";
 
             //get the data from the database
-            List<UserCartDBModel> q1_results = SqliteDataAccess.LoadData<UserCartDBModel>(sql);
+            List<UserCartDBModel> q1_results = SqliteDataAccess.LoadData<UserCartDBModel>(sql,p);
             
             //create a final list of userCartItems, this is what will be returned
             List<UserCartItemModel> results = new List<UserCartItemModel>();
@@ -28,9 +33,13 @@ namespace KimsWoodWorking.BusinessLogic
                 userCartItem.quantity = item.quantity;
                 userCartItem.user_Id = item.user_id;
 
-                sql = "select * from product where product_id =" + item.product_id;
+                p = new DynamicParameters();
 
-                List<ProductDBModel> products = SqliteDataAccess.LoadData<ProductDBModel>(sql);
+                p.Add("@ProductID", item.product_id);
+
+                sql = "select * from product where product_id = @ProductID";
+
+                List<ProductDBModel> products = SqliteDataAccess.LoadData<ProductDBModel>(sql,p);
 
                 //data from the product table
                 userCartItem.product_id = products[0].product_id;
@@ -59,21 +68,39 @@ namespace KimsWoodWorking.BusinessLogic
         }
 
         public static int deleteCartItem(int user, int product) {
-            string sql = @"delete from user_cart where user_id = " + user + " and product_id = " + product;
 
-            return SqliteDataAccess.executeStatment(sql);
+            var p = new DynamicParameters();
+
+            p.Add("@UserId",user);
+            p.Add("@ProductId",product);
+
+            string sql = @"delete from user_cart where user_id = @UserId and product_id = @ProductId";
+
+            return SqliteDataAccess.executeStatment(sql,p);
         }
 
         public static int updateCartItem(int user, int product, int quantity) {
-            string sql = @"update user_cart set quantity = " + quantity + " where user_id = " + user + " and product_id = " + product;
 
-            return SqliteDataAccess.executeStatment(sql);
+            var p = new DynamicParameters();
+
+            p.Add("@Quantity",quantity);
+            p.Add("@UserID", user);
+            p.Add("@ProductID", product);
+
+            string sql = @"update user_cart set quantity = @Quantity where user_id = @UserID and product_id = @ProductID";
+
+            return SqliteDataAccess.executeStatment(sql,p);
         }
 
         public static int emptyUserCart() {
-            string sql = "delete from user_cart where user_id = " + GlobalVariables.CurrentUser_id;
 
-            return SqliteDataAccess.executeStatment(sql);
+            var p = new DynamicParameters();
+
+            p.Add("@UserID", GlobalVariables.CurrentUser_id);
+
+            string sql = "delete from user_cart where user_id = @UserID";
+
+            return SqliteDataAccess.executeStatment(sql,p);
         }
     }
 }
