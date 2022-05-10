@@ -48,12 +48,12 @@ namespace KimsWoodWorking.BusinessLogic
                         string sql = @"insert into parent_order(user_id,order_status_id,total_order_cost,order_date,status_date) 
                           values(@UserID," + 1 + ",@TotalOrderCost,\"" + DateTime.Now.ToString() + "\",\"" + DateTime.Now.ToString() + "\")";
 
-                        SqliteDataAccess.executeStatment(sql,p);
+                        conn.Execute(sql,p);
 
                         //get the parent order id of the record that was just created
                         sql = "select parent_order_id from parent_order where user_id = @UserID and shipping_detail_id is NULL and total_order_cost = @TotalOrderCost";
 
-                        List<queryResult> queryResults = SqliteDataAccess.LoadData<queryResult>(sql,p);
+                        List<queryResult> queryResults = conn.Query<queryResult>(sql,p).ToList();
 
                         int parent_order_id = queryResults[0].parent_order_id;
 
@@ -68,7 +68,7 @@ namespace KimsWoodWorking.BusinessLogic
 
                             sql = "insert into order_detail(parent_order_id, product_id,quantity) values(@ParentOrderID,@ProductID,@Quantity)";
 
-                            SqliteDataAccess.executeStatment(sql,p);
+                            conn.Execute(sql,p);
                         }
 
                         p = new DynamicParameters();
@@ -81,12 +81,12 @@ namespace KimsWoodWorking.BusinessLogic
                         p.Add("@ShippingStreetAddress",com.shipping_street_address);
                         p.Add("@ShippingCity",com.shipping_city);
                         p.Add("@ShippingState",com.shipping_state);
-                        p.Add("ShippingPostalCode", com.shipping_postal_code);
+                        p.Add("@ShippingPostalCode", com.shipping_postal_code);
 
                         sql = @"insert into shipping_detail(parent_order_id,shipping_name,shipping_street_address,shipping_city,shipping_state,shipping_postal_code) 
-                                values(@ParentOrderID,@ShippingName,@ShippingStreetAddress,@ShippingCity,@ShippingState,ShippingPostalCode)";
+                                values(@ParentOrderID,@ShippingName,@ShippingStreetAddress,@ShippingCity,@ShippingState,@ShippingPostalCode)";
 
-                        SqliteDataAccess.executeStatment(sql,p);
+                        conn.Execute(sql,p);
 
                         //insert into Billing details
                         string b_name = com.billing_first_name + " " + com.billing_last_name;
@@ -108,7 +108,7 @@ namespace KimsWoodWorking.BusinessLogic
                         sql = @"insert into billing_detail(parent_order_id,billing_street_address,billing_city,billing_state,billing_postal_code,cc_number,cc_exp_month,cc_exp_year,cc_cvc,billing_name)
                                 values(@ParentOrderID,@BillingStreetAddress,@BillingCity,@BillingState,@BillingPostalCode,@CCNumber,@CCExpMonth,@CCExpYear,@CCCvc,@BillingName)";
 
-                        SqliteDataAccess.executeStatment(sql,p);
+                        conn.Execute(sql,p);
 
                         p = new DynamicParameters();
 
@@ -117,7 +117,7 @@ namespace KimsWoodWorking.BusinessLogic
                         //update parent order with shipping_id
                         sql = "select shipping_detail_id from shipping_detail where parent_order_id = @ParentOrderId";
 
-                        queryResults = SqliteDataAccess.LoadData<queryResult>(sql,p);
+                        queryResults = conn.Query<queryResult>(sql,p).ToList();
 
                         int shipping_detail_id = queryResults[0].shipping_detail_id;
 
@@ -125,12 +125,12 @@ namespace KimsWoodWorking.BusinessLogic
 
                         sql = "update parent_order set shipping_detail_id = @ShippingDetailId where parent_order_id = @ParentOrderId";
 
-                        SqliteDataAccess.executeStatment(sql,p);
+                        conn.Execute(sql,p);
 
                         //update parent order with billing_id
                         sql = "select billing_detail_id from billing_detail where parent_order_id = @ParentOrderId";
 
-                        queryResults = SqliteDataAccess.LoadData<queryResult>(sql,p);
+                        queryResults = conn.Query<queryResult>(sql,p).ToList();
 
                         int billing_detail_id = queryResults[0].billing_detail_id;
 
@@ -138,14 +138,19 @@ namespace KimsWoodWorking.BusinessLogic
 
                         sql = "update parent_order set billing_detail_id = @BillingDetailID where parent_order_id = @ParentOrderId";
 
-                        SqliteDataAccess.executeStatment(sql,p);
+                        conn.Execute(sql,p);
 
                         //ToDo:
                         //email user
 
                         //delete user cart
-                        emptyUserCart();
-                        
+                        p = new DynamicParameters();
+                        p.Add("@UserID", GlobalVariables.CurrentUser_id);
+
+                        sql = "delete from user_cart where user_id = @UserID";
+
+                        conn.Execute(sql, p);
+
                         //commit the changes
                         trans.Commit();
 

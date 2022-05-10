@@ -21,7 +21,6 @@ namespace KimsWoodWorking
         //returns a list of the model you send it.
         public static List<T> LoadData<T>(string sql,DynamicParameters p)
         {
-            var q = new DynamicParameters();
             using (IDbConnection conn = new SQLiteConnection(LoadConnectionString()))
             {
                 conn.Open();

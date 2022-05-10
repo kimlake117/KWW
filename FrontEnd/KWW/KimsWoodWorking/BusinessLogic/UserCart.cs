@@ -91,16 +91,5 @@ namespace KimsWoodWorking.BusinessLogic
 
             return SqliteDataAccess.executeStatment(sql,p);
         }
-
-        public static int emptyUserCart() {
-
-            var p = new DynamicParameters();
-
-            p.Add("@UserID", GlobalVariables.CurrentUser_id);
-
-            string sql = "delete from user_cart where user_id = @UserID";
-
-            return SqliteDataAccess.executeStatment(sql,p);
-        }
     }
 }
