@@ -22,9 +22,25 @@ namespace KimsWoodWorking.BusinessLogic
             string sql = @"insert into user(user_name,email,password)
                             values(@UserName, @Email, @Password)";
 
-            return SqliteDataAccess.SaveData(sql, userDBModel);
-        }
+            int rowsInserted =  SqliteDataAccess.SaveData(sql, userDBModel);
 
+            //need this to get the userid we just created.
+            UserModel userModel = new UserModel();
+            userModel.UserName = username;
+
+            rowsInserted += insertUserRole(getUserId(userModel));
+
+            return rowsInserted;
+        }
+        private static int insertUserRole(int user_id) { 
+            var p = new DynamicParameters();
+
+            p.Add("@UserID", user_id);
+
+            string sql = "insert into user_role(user_id, role_id) values(@UserID,1)";
+
+            return SqliteDataAccess.executeStatment(sql, p);
+        }
         public static int UpdateUserEmail(string newEmail) {
             UserDBModel userDBModel =new UserDBModel();
 
@@ -111,5 +127,34 @@ namespace KimsWoodWorking.BusinessLogic
             return q_1.First().user_id;
         }
 
+        public static List<RoleDBModel> getUserRoles() { 
+            List<RoleDBModel> roles = new List<RoleDBModel>();
+            if (GlobalVariables.currentUser.isSignedIn)
+            {
+                var p = new DynamicParameters();
+
+                p.Add("@UserID", GlobalVariables.currentUser.user_id);
+
+                string sql = @"select * from user_role 
+                                inner join role on role.role_id = user_role.role_id
+                                where user_id = @UserID";
+
+                roles = SqliteDataAccess.LoadData<RoleDBModel>(sql,p);
+
+                return roles;
+            }
+            else
+            {
+                return roles;
+            }
+        }
+        public static bool userHasRole(UserModel user,String role) {
+            foreach (var item in user.roleList) {
+                if (item.role_title == role) { 
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

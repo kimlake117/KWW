@@ -24,14 +24,11 @@ namespace KimsWoodWorking.Controllers
         //this handles both loging in and loggin out
         public ActionResult LogIn()
         {
-            if (GlobalVariables.logInOut == "Log Out") {
+            if (GlobalVariables.currentUser.isSignedIn) {
 
                 //reset global variables
-                GlobalVariables.currentUser.UserName = "Account";
+                GlobalVariables.currentUser = new UserModel();
                 GlobalVariables.logInOut = "Log In";
-                GlobalVariables.currentUser.isSignedIn = false;
-                GlobalVariables.currentUser.user_id = -1;
-                GlobalVariables.currentUser.Email = "";
 
 
                 return View("~/Views/Home/Index.cshtml");
@@ -54,6 +51,7 @@ namespace KimsWoodWorking.Controllers
                     GlobalVariables.currentUser.Email = user.Email;
                     GlobalVariables.currentUser.UserName = user.UserName;
                     GlobalVariables.currentUser.user_id = UserAccount.getUserId(user);
+                    GlobalVariables.currentUser.roleList = getUserRoles();
 
                     string redirectURL = GlobalVariables.attemptedAccessURL;
 
