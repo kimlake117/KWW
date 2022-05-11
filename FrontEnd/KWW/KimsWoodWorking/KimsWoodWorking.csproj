@@ -186,6 +186,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\OrderManager.cs" />
     <Compile Include="BusinessLogic\ProductManager.cs" />
+    <Compile Include="BusinessLogic\StateManager.cs" />
     <Compile Include="BusinessLogic\UserAccount.cs" />
     <Compile Include="BusinessLogic\UserCart.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -198,6 +199,7 @@
     </Compile>
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Models\databaseModels\ProductDBModel.cs" />
+    <Compile Include="Models\databaseModels\StateModelDB.cs" />
     <Compile Include="Models\databaseModels\UserCartDBModel.cs" />
     <Compile Include="Models\databaseModels\UserDBModel.cs" />
     <Compile Include="Models\CheckOutModel.cs" />

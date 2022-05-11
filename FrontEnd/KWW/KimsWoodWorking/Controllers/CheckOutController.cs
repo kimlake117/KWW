@@ -8,6 +8,7 @@ using KimsWoodWorking.BusinessLogic;
 using static KimsWoodWorking.BusinessLogic.UserCart;
 using static KimsWoodWorking.BusinessLogic.OrderManager;
 
+
 namespace KimsWoodWorking.Controllers
 {
     public class CheckOutController : Controller
@@ -25,7 +26,8 @@ namespace KimsWoodWorking.Controllers
         }
 
         public ActionResult shipping_and_billing() {
-            return View();
+            CheckOutModel model = new CheckOutModel();
+            return View(model);
         }
 
         //this takes all the user info for an order and creates the order.

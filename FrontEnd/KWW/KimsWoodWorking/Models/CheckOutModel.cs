@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using KimsWoodWorking.Models.databaseModels;
+using static KimsWoodWorking.BusinessLogic.StateManager;
 
 namespace KimsWoodWorking.Models
 {
     public class CheckOutModel
     {
-        [Display(Name ="First Name")]
-        [Required(ErrorMessage ="This Field is required.")]
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "This Field is required.")]
         public string customer_first_name { get; set; }
 
         [Display(Name = "Last Name")]
@@ -26,9 +28,15 @@ namespace KimsWoodWorking.Models
         [Required(ErrorMessage = "This Field is required.")]
         public string shipping_city { get; set; }
 
+        //the state the user selects for shipping
         [Display(Name = "Shipping State")]
         [Required(ErrorMessage = "This Field is required.")]
         public int shipping_state { get; set; }
+
+        //the list of states
+        [Display(Name = "Shipping State")]
+        [Required(ErrorMessage = "This Field is required.")]
+        public IEnumerable<StateModelDB> StatesList { get; set; } = getStates();
 
         [Display(Name = "Shipping Postal Code")]
         [DataType(DataType.PostalCode)]
@@ -76,5 +84,6 @@ namespace KimsWoodWorking.Models
         [Required(ErrorMessage = "This Field is required.")]
         public int cc_cvc { get; set; }
 
+        
     }
 }

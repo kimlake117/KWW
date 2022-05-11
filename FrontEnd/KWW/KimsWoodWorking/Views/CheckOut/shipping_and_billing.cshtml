@@ -1,5 +1,6 @@
 ﻿@model KimsWoodWorking.Models.CheckOutModel
 
+
 @{
     ViewBag.Title = "payment_and_shipping";
 }
@@ -49,8 +50,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.shipping_state, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.shipping_state, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.shipping_state, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.shipping_state, new SelectList(Model.StatesList, "state_id", "state_name"))
+            @Html.ValidationMessageFor(model => model.StatesList, "", new { @class = "text-danger" })
+            <br />
         </div>
     </div>
 
@@ -97,8 +99,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.billing_state, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.billing_state, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.billing_state, new SelectList(Model.StatesList,"state_id","state_name"))
             @Html.ValidationMessageFor(model => model.billing_state, "", new { @class = "text-danger" })
+            <br />
         </div>
     </div>
 
