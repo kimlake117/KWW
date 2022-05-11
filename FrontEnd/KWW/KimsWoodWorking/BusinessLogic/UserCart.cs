@@ -14,7 +14,7 @@ namespace KimsWoodWorking.BusinessLogic
 
             var p = new DynamicParameters();
 
-            p.Add("@UserId", GlobalVariables.CurrentUser_id);
+            p.Add("@UserID", GlobalVariables.currentUser.user_id);
 
             string sql = @"select * from user_cart where user_id = @UserId;";
 
@@ -96,7 +96,7 @@ namespace KimsWoodWorking.BusinessLogic
             var p = new DynamicParameters();
 
             p.Add("@ProductID",productID);
-            p.Add("@UserID", GlobalVariables.CurrentUser_id);
+            p.Add("@UserID", GlobalVariables.currentUser.user_id);
 
             string sql = @"select * from user_cart where user_id = @UserID and product_id = @ProductID";
 

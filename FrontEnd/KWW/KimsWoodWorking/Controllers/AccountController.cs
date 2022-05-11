@@ -24,15 +24,14 @@ namespace KimsWoodWorking.Controllers
         //this handles both loging in and loggin out
         public ActionResult LogIn()
         {
-            //if the user was already logged in, then log them out
             if (GlobalVariables.logInOut == "Log Out") {
 
                 //reset global variables
-                GlobalVariables.CurrentUser_Name = "Account";
+                GlobalVariables.currentUser.UserName = "Account";
                 GlobalVariables.logInOut = "Log In";
-                GlobalVariables.isSignedIn = false;
-                GlobalVariables.CurrentUser_id = -1;
-                GlobalVariables.CurrentUser_Email = "";
+                GlobalVariables.currentUser.isSignedIn = false;
+                GlobalVariables.currentUser.user_id = -1;
+                GlobalVariables.currentUser.Email = "";
 
 
                 return View("~/Views/Home/Index.cshtml");
@@ -51,10 +50,10 @@ namespace KimsWoodWorking.Controllers
                 if (UserAccount.pwMatch(user)) {
 
                     GlobalVariables.logInOut = "Log Out";
-                    GlobalVariables.isSignedIn = true;
-                    GlobalVariables.CurrentUser_Email=user.Email;
-                    GlobalVariables.CurrentUser_Name = user.UserName;
-                    GlobalVariables.CurrentUser_id = UserAccount.getUserId(user);
+                    GlobalVariables.currentUser.isSignedIn = true;
+                    GlobalVariables.currentUser.Email = user.Email;
+                    GlobalVariables.currentUser.UserName = user.UserName;
+                    GlobalVariables.currentUser.user_id = UserAccount.getUserId(user);
 
                     string redirectURL = GlobalVariables.attemptedAccessURL;
 
@@ -91,7 +90,8 @@ namespace KimsWoodWorking.Controllers
         //**********************Cart and Orders********************************
         public ActionResult ViewCart()
         {
-            if (GlobalVariables.isSignedIn) {
+            if (GlobalVariables.currentUser.isSignedIn)
+            {
 
                 List<UserCartItemModel> userCart = UserCart.getUserCart();
 
@@ -108,7 +108,7 @@ namespace KimsWoodWorking.Controllers
         }
 
         public ActionResult ViewOrders() {
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 List<OrderSummaryModel> userOrders = getUserOrders();
                 return View(userOrders);
@@ -121,7 +121,7 @@ namespace KimsWoodWorking.Controllers
         }
 
         public ActionResult ViewOrderDetails(int parent_order = -1) {
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 List<OrderDetailItemModel> orderDetails = getOrderDetails(parent_order);
                 return View(orderDetails);
@@ -148,7 +148,7 @@ namespace KimsWoodWorking.Controllers
         //**********************Account settings********************************
         public ActionResult Settings()
         {
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 return View();
             }
@@ -161,7 +161,7 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult ChangePassword()
         {
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 return View();
             }
@@ -181,8 +181,7 @@ namespace KimsWoodWorking.Controllers
         }
         public ActionResult ChangeEmail()
         {
-
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 return View();
             }
@@ -202,7 +201,7 @@ namespace KimsWoodWorking.Controllers
         }
         public ActionResult DeleteAccount()
         {
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 return View();
             }

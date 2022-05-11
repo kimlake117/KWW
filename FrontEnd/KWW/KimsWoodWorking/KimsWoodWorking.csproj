@@ -199,6 +199,7 @@
     </Compile>
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Models\databaseModels\ProductDBModel.cs" />
+    <Compile Include="Models\databaseModels\RoleDBModel.cs" />
     <Compile Include="Models\databaseModels\StateModelDB.cs" />
     <Compile Include="Models\databaseModels\UserCartDBModel.cs" />
     <Compile Include="Models\databaseModels\UserDBModel.cs" />

@@ -28,8 +28,8 @@ namespace KimsWoodWorking.BusinessLogic
         public static int UpdateUserEmail(string newEmail) {
             UserDBModel userDBModel =new UserDBModel();
 
-            userDBModel.UserName = GlobalVariables.CurrentUser_Name;
-            userDBModel.Email = newEmail; 
+            userDBModel.UserName = GlobalVariables.currentUser.UserName;
+            userDBModel.Email = newEmail;
             string sql = "update user set email = @email where user_name = @UserName";
 
             return SqliteDataAccess.SaveData(sql, userDBModel);
@@ -39,7 +39,7 @@ namespace KimsWoodWorking.BusinessLogic
             UserDBModel userDBModel =new UserDBModel();
 
             userDBModel.Password = HashPassword(newPassword);
-            userDBModel.UserName = GlobalVariables.CurrentUser_Name;
+            userDBModel.UserName = GlobalVariables.currentUser.UserName;
 
             string sql = "update user set password = @Password where user_name = @UserName";
 

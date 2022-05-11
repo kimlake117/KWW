@@ -15,7 +15,7 @@ namespace KimsWoodWorking.Controllers
         public ActionResult Index()
         {
             //this makes the sign in function better
-            if (!GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 GlobalVariables.attemptedAccessURL = "~/Home/Index";
             }
@@ -23,7 +23,7 @@ namespace KimsWoodWorking.Controllers
         }
 
         public ActionResult addToCart(int productID) {
-            if (GlobalVariables.isSignedIn)
+            if (GlobalVariables.currentUser.isSignedIn)
             {
                 addProductToCart(productID);
                 return Redirect("~/Account/ViewCart");

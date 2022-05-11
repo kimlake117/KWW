@@ -38,8 +38,8 @@ namespace KimsWoodWorking.BusinessLogic
                         //get the current date
 
                         var p = new DynamicParameters();
-
-                        p.Add("@UserID", GlobalVariables.CurrentUser_id);
+ 
+                        p.Add("@UserID", GlobalVariables.currentUser.user_id);
                         p.Add("@TotalOrderCost", cost);
 
                         //insert user_id, order_status of new, total cost, and the data into the parent order table
@@ -143,7 +143,7 @@ namespace KimsWoodWorking.BusinessLogic
 
                         //delete user cart
                         p = new DynamicParameters();
-                        p.Add("@UserID", GlobalVariables.CurrentUser_id);
+                        p.Add("@UserID", GlobalVariables.currentUser.user_id);
 
                         sql = "delete from user_cart where user_id = @UserID";
 
@@ -176,7 +176,7 @@ namespace KimsWoodWorking.BusinessLogic
 
             var p = new DynamicParameters();
 
-            p.Add("@UserID",GlobalVariables.CurrentUser_id);
+            p.Add("@UserID", GlobalVariables.currentUser.user_id);
 
             string sql = @"select PO.parent_order_id,PO.total_order_cost,order_date, order_status_description, status_date, shipping_name, shipping_street_address, shipping_city,state_name, shipping_postal_code
                             from parent_order PO INNER JOIN shipping_detail SD on PO.parent_order_id = SD.parent_order_id
