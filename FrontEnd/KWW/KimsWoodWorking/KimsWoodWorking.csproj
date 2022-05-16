@@ -282,7 +282,6 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangeEmail.cshtml" />
     <Content Include="Views\Account\PostAccountChange.cshtml" />
-    <Content Include="Views\Account\DeleteAccount.cshtml" />
     <Content Include="Views\CheckOut\shipping_and_billing.cshtml" />
     <Content Include="Views\CheckOut\OrderComplete.cshtml" />
     <Content Include="Views\CheckOut\ErrorWithOrder.cshtml" />
@@ -292,6 +291,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Home\NavBar.cshtml" />
+    <Content Include="Views\Admin\DeleteAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

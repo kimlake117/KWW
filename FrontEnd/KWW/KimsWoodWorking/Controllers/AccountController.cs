@@ -196,25 +196,6 @@ namespace KimsWoodWorking.Controllers
             UserAccount.UpdateUserEmail(changes.Email);
             @ViewBag.Message = "Account Change was a success.";
             return View("PostAccountChange");
-        }
-        public ActionResult DeleteAccount()
-        {
-            if (GlobalVariables.currentUser.isSignedIn)
-            {
-                return View();
-            }
-            else
-            {
-                GlobalVariables.attemptedAccessURL = "~/Account/DeleteAccount";
-                return Redirect("LogIn");
-            }
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteAccount(int user_id) {
-            @ViewBag.Message = "Account Change was a success.";
-            return View("PostAccountChange");
-        }
-        
+        }     
     }
 }

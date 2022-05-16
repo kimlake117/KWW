@@ -11,8 +11,10 @@ namespace KimsWoodWorking.Controllers
     {
         public ActionResult Index()
         {
+            //if the user is signed in
             if (GlobalVariables.currentUser.isSignedIn)
             {
+                //if the user is an admin
                 if (userHasRole(GlobalVariables.currentUser,2)) {
                     return View();
                 }
@@ -22,6 +24,16 @@ namespace KimsWoodWorking.Controllers
             {
                 GlobalVariables.attemptedAccessURL = "~/Admin/";
                 return Redirect("~/Account/LogIn");
+            }
+        }
+
+        public ActionResult DeleteAccount() {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                return View();
+            }
+            else {
+                return View("UnauthorizedAccess");
             }
         }
     }
