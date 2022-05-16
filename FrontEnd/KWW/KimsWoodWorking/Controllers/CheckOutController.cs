@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.BusinessLogic;
-using static KimsWoodWorking.BusinessLogic.UserCart;
+using static KimsWoodWorking.BusinessLogic.UserCartManager;
 using static KimsWoodWorking.BusinessLogic.OrderManager;
 
 

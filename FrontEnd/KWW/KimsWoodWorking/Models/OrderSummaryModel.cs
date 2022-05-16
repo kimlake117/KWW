@@ -37,5 +37,11 @@ namespace KimsWoodWorking.Models
 
         [Display(Name = "Shipping Postal Code")]
         public int shipping_postal_code { get; set; }
+
+        [Display(Name = "User Name")]
+        public string userName { get; set; }
+        [Display(Name = "User ID")]
+        public int userID { get; set; }
+
     }
 }

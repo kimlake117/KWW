@@ -188,8 +188,8 @@
     <Compile Include="BusinessLogic\OrderManager.cs" />
     <Compile Include="BusinessLogic\ProductManager.cs" />
     <Compile Include="BusinessLogic\StateManager.cs" />
-    <Compile Include="BusinessLogic\UserAccount.cs" />
-    <Compile Include="BusinessLogic\UserCart.cs" />
+    <Compile Include="BusinessLogic\UserAccountManager.cs" />
+    <Compile Include="BusinessLogic\UserCartManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
@@ -200,6 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVariables.cs" />
+    <Compile Include="Models\databaseModels\OrderStatusDBModel.cs" />
     <Compile Include="Models\databaseModels\ProductDBModel.cs" />
     <Compile Include="Models\databaseModels\RoleDBModel.cs" />
     <Compile Include="Models\databaseModels\StateModelDB.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="Models\UserCartItemModel.cs" />
     <Compile Include="Models\NewUserModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\ViewModels\SearchOrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqliteDataAccess.cs" />
     <Compile Include="Startup.cs" />
@@ -292,6 +294,10 @@
     <Content Include="Views\Admin\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Home\NavBar.cshtml" />
     <Content Include="Views\Admin\DeleteAccount.cshtml" />
+    <Content Include="Views\Admin\ChangeUserPW.cshtml" />
+    <Content Include="Views\Admin\ChangeUserRole.cshtml" />
+    <Content Include="Views\Admin\EditOrder.cshtml" />
+    <Content Include="Views\Admin\SearchOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

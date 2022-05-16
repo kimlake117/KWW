@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
-using static KimsWoodWorking.BusinessLogic.UserAccount;
+using static KimsWoodWorking.BusinessLogic.UserAccountManager;
 
 namespace KimsWoodWorking.Controllers
 {

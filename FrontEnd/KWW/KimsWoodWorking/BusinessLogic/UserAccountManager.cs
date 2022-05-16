@@ -9,7 +9,7 @@ using Dapper;
 
 namespace KimsWoodWorking.BusinessLogic
 {
-    public static class UserAccount
+    public static class UserAccountManager
     {
         public static int CreateNewUser(string username, string email, string password) { 
 
@@ -125,6 +125,23 @@ namespace KimsWoodWorking.BusinessLogic
             List<UserDBModel> q_1 = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
 
             return q_1.First().user_id;
+        }
+
+        public static string getUserName(int user_id) {
+            string name = "";
+
+            DynamicParameters p = new DynamicParameters();
+
+            p.Add("@UserID", user_id);
+
+            string sql = "select user_name from user where user_id = @UserID";
+
+            List<string> results = SqliteDataAccess.LoadData<string>(sql,p);
+
+            if (results.Count > 0) {
+                name = results[0];
+            } 
+            return name;
         }
 
         public static List<RoleDBModel> getUserRoles() { 

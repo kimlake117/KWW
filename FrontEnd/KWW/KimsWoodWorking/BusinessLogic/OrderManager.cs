@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using static KimsWoodWorking.BusinessLogic.UserCart;
+using static KimsWoodWorking.BusinessLogic.UserCartManager;
+using static KimsWoodWorking.BusinessLogic.UserAccountManager;
+using KimsWoodWorking.Models.databaseModels;
 using KimsWoodWorking.Models;
 using Dapper;
 using System.Data.SQLite;
@@ -235,6 +237,119 @@ namespace KimsWoodWorking.BusinessLogic
 
             return orderDetails;
         }
+
+        public static List<OrderSummaryModel> searchOrders(OrderSummaryModel orderSearched) {
+            //the final list that will be returned.
+            List<OrderSummaryModel> orders = new List<OrderSummaryModel>();
+
+            //add all the parameters from the model passed in through the arguments
+            DynamicParameters p = new DynamicParameters();
+
+            p.Add("@ParentOrderID",orderSearched.parent_order_id);
+            p.Add("@OrderDate","%"+orderSearched.order_date+"%");
+            p.Add("@OrderStatusDescription", orderSearched.order_status_description);
+            p.Add("@StatusDate","%"+orderSearched.status_date+"%");
+            p.Add("@ShippingName",orderSearched.shipping_name);
+            p.Add("@ShippingSreetAddress", orderSearched.shipping_street_address);
+            p.Add("@ShippingCity", orderSearched.shipping_city);
+            p.Add("@ShippingState", orderSearched.shipping_state);
+            p.Add("@ShippingPostalCode", orderSearched.shipping_postal_code);
+            p.Add("@UserName", orderSearched.userName);
+
+            //the overall sql statment
+            string sql = @"select * from parent_order po 
+                            inner join order_status os on po.order_status_id = os.order_status_id
+                            inner join shipping_detail sd on sd.shipping_detail_id = po.shipping_detail_id
+                            inner join user on user.user_id = po.user_id
+                            inner join state on state.state_id = sd.shipping_state";
+                    
+            //check if a where clause is needed
+            if (orderSearched.parent_order_id != 0 | orderSearched.order_date != null | orderSearched.status_date != null | orderSearched.order_status_description != null |
+                orderSearched.shipping_name != null | orderSearched.shipping_street_address != null | orderSearched.shipping_city != null | orderSearched.shipping_postal_code != 0 |
+                orderSearched.userName != null | orderSearched.shipping_state != null)
+            {
+                //add the where clause
+                sql +=" where ";
+                //add each statement where user input is not null
+                if (orderSearched.parent_order_id != 0)
+                {
+                    sql += " po.parent_order_id = @ParentOrderID and ";
+                }
+                if (orderSearched.order_date != null) {
+                    sql += " substr(order_date,1,9) like @OrderDate and ";
+                }
+                if (orderSearched.status_date != null) {
+                    sql += " substr(status_date,1,9) like @StatusDate and ";
+                }
+                if (orderSearched.order_status_description != null) {
+                    if (orderSearched.order_status_description != "Select Status")
+                    {
+                        sql += " order_status_description = @OrderStatusDescription and ";
+                    }
+                }
+                if (orderSearched.shipping_name != null) {
+                    sql += " sd.shipping_name = @ShippingName and ";
+                }
+                if (orderSearched.shipping_street_address != null) {
+                    sql += " sd.shipping_street_address = @ShippingSreetAddress and ";
+                }
+                if (orderSearched.shipping_city != null) {
+                    sql += " sd.shipping_city = @ShippingCity and ";
+                }
+                if (orderSearched.shipping_state != null) {
+                    if (orderSearched.shipping_state != "0")
+                    {
+                        sql += " state.state_id = @ShippingState and ";
+                    }
+                }
+                if (orderSearched.shipping_postal_code != 0) {
+                    sql += " sd.shipping_postal_code = @ShippingPostalCode and ";
+                }
+                if (orderSearched.userName != null) {
+                    sql += " user.user_name = @UserName and ";
+                }
+                //to end the statment so i can just add 'And' at the end of all the potenial searchable fields
+                sql += " 1=1 ";
+            }
+
+            //execute the statment
+            List<queryResult> queryResults = SqliteDataAccess.LoadData<queryResult>(sql,p);
+
+            //translate query results into OrderSummaryModel
+            foreach (queryResult result in queryResults)
+            {
+                OrderSummaryModel orderSummaryModel = new OrderSummaryModel();
+
+                orderSummaryModel.userID = result.user_id;
+                orderSummaryModel.parent_order_id = result.parent_order_id;
+                orderSummaryModel.total_order_cost = result.total_order_cost;
+                orderSummaryModel.order_date = result.order_date;
+                orderSummaryModel.order_status_description = result.order_status_description;
+                orderSummaryModel.status_date = result.status_date;
+                orderSummaryModel.shipping_name = result.shipping_name;
+                orderSummaryModel.shipping_street_address = result.shipping_street_address;
+                orderSummaryModel.shipping_city = result.shipping_city;
+                orderSummaryModel.shipping_state = result.state_name;
+                orderSummaryModel.shipping_postal_code = result.shipping_postal_code;
+                orderSummaryModel.userName = getUserName(result.user_id);
+
+                orders.Add(orderSummaryModel);
+            }
+
+            return orders;
+        }
+
+        public static List<OrderStatusDBModel> getOrderStatusOptions() { 
+            List<OrderStatusDBModel> ordersStatusOptions = new List<OrderStatusDBModel>();
+
+            DynamicParameters p = new DynamicParameters();
+
+            string sql = "select * from order_status";
+
+            ordersStatusOptions = SqliteDataAccess.LoadData<OrderStatusDBModel>(sql, p);
+
+            return ordersStatusOptions;
+        }
         private class queryResult
         {
             public int parent_order_id { get; set; }
@@ -252,6 +367,8 @@ namespace KimsWoodWorking.BusinessLogic
             public double product_price { get; set; }
             public int quantity { get; set; }
             public string product_name { get; set; }
+            public int user_id { get; set; }
+
         }
     }
 }

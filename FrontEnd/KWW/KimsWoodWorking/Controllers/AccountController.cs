@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.BusinessLogic;
-using static KimsWoodWorking.BusinessLogic.UserAccount;
+using static KimsWoodWorking.BusinessLogic.UserAccountManager;
 using static KimsWoodWorking.BusinessLogic.OrderManager;
 
 
@@ -44,13 +44,13 @@ namespace KimsWoodWorking.Controllers
         public ActionResult LogIn(UserModel user)
         {
             if (ModelState.IsValid) {
-                if (UserAccount.pwMatch(user)) {
+                if (UserAccountManager.pwMatch(user)) {
 
                     GlobalVariables.logInOut = "Log Out";
                     GlobalVariables.currentUser.isSignedIn = true;
                     GlobalVariables.currentUser.Email = user.Email;
                     GlobalVariables.currentUser.UserName = user.UserName;
-                    GlobalVariables.currentUser.user_id = UserAccount.getUserId(user);
+                    GlobalVariables.currentUser.user_id = UserAccountManager.getUserId(user);
                     GlobalVariables.currentUser.roleList = getUserRoles();
 
                     string redirectURL = GlobalVariables.attemptedAccessURL;
@@ -91,9 +91,9 @@ namespace KimsWoodWorking.Controllers
             if (GlobalVariables.currentUser.isSignedIn)
             {
 
-                List<UserCartItemModel> userCart = UserCart.getUserCart();
+                List<UserCartItemModel> userCart = UserCartManager.getUserCart();
 
-                double total = UserCart.UserCartTotalValue();
+                double total = UserCartManager.UserCartTotalValue();
 
                 ViewBag.TotalCartPrice = total;
 
@@ -133,13 +133,13 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult DeleteCartItem(EditCartItemModel item) {
 
-            UserCart.deleteCartItem(item.Id,item.product);
+            UserCartManager.deleteCartItem(item.Id,item.product);
             return Redirect("~/Account/ViewCart");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult updateCartItem(UserCartItemModel item) {
-            UserCart.updateCartItem(item.user_Id, item.product_id, item.quantity);
+            UserCartManager.updateCartItem(item.user_Id, item.product_id, item.quantity);
             return Redirect("~/Account/ViewCart");
         }
 
@@ -173,7 +173,7 @@ namespace KimsWoodWorking.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ModifyUserModel changes)
         {
-                UserAccount.UpdateUserPassword(changes.Password);
+                UserAccountManager.UpdateUserPassword(changes.Password);
                 @ViewBag.Message = "Account Change was a success.";
                 return View("PostAccountChange");          
         }
@@ -193,7 +193,7 @@ namespace KimsWoodWorking.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChangeEmail(ModifyUserModel changes) {
 
-            UserAccount.UpdateUserEmail(changes.Email);
+            UserAccountManager.UpdateUserEmail(changes.Email);
             @ViewBag.Message = "Account Change was a success.";
             return View("PostAccountChange");
         }     

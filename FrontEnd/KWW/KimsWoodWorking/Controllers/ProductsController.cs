@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.SQLite;
 using static KimsWoodWorking.BusinessLogic.ProductManager;
-using static KimsWoodWorking.BusinessLogic.UserCart;
+using static KimsWoodWorking.BusinessLogic.UserCartManager;
 
 namespace KimsWoodWorking.Controllers
 {

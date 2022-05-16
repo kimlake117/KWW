@@ -1,0 +1,178 @@
+﻿@model KimsWoodWorking.Models.ViewModels.SearchOrderViewModel
+
+@{
+    ViewBag.Title = "SearchOrders";
+}
+<br />
+<h2>Search Orders</h2>
+<br />
+
+@using (Html.BeginForm("SearchOrder", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Order.parent_order_id)</th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Order.userName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.order_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.order_status_description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.status_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.shipping_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.shipping_street_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.shipping_city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.shipping_state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.shipping_postal_code)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.EditorFor(model => model.Order.parent_order_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.parent_order_id, "Enter zero to not specify order number.", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.userName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.userName, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.order_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.order_date, "MM/DD/YYYY", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.Order.order_status_description, new SelectList(Model.OrderStatusList, "order_status_description", "order_status_description"))
+                @Html.ValidationMessageFor(model => model.Order.order_status_description, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.status_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.status_date, "MM/DD/YYYY", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.shipping_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.shipping_name, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.shipping_street_address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.shipping_street_address, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.shipping_city, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.shipping_city, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.DropDownListFor(model => model.Order.shipping_state, new SelectList(Model.StatesList, "state_id", "state_name"))
+                @Html.ValidationMessageFor(model => model.StatesList, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.Order.shipping_postal_code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Order.shipping_postal_code, "Enter zero to not specify postal code.", new { @class = "text-danger" })
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Search" />
+}
+<br />
+<h3>Results</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().parent_order_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().userName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().total_order_cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().order_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().order_status_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().status_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().shipping_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().shipping_street_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().shipping_city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().shipping_state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderSummaries.First().shipping_postal_code)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model.OrderSummaries)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.parent_order_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userName)
+            </td>
+            <td>
+                <p>
+                    $@Html.DisplayFor(modelItem => item.total_order_cost)
+                </p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.order_status_description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipping_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipping_street_address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipping_city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipping_state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipping_postal_code)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditOrder", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+
+    }
+
+</table>

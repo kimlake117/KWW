@@ -1,2 +1,2 @@
-5/11/2022 1:09:36 PMdatabase is locked
-database is locked
+5/16/2022 4:44:36 PMSQL logic error
+no such column: po.order_status_description

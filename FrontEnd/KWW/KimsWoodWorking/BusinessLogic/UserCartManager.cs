@@ -8,7 +8,7 @@ using Dapper;
 
 namespace KimsWoodWorking.BusinessLogic
 {
-    public static class UserCart
+    public static class UserCartManager
     {
         public static List<UserCartItemModel> getUserCart() {
 
