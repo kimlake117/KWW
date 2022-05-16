@@ -148,9 +148,10 @@ namespace KimsWoodWorking.BusinessLogic
                 return roles;
             }
         }
-        public static bool userHasRole(UserModel user,String role) {
+        // 1 = User; 2 = Admin; 3 = Site Focal
+        public static bool userHasRole(UserModel user,int role) {
             foreach (var item in user.roleList) {
-                if (item.role_title == role) { 
+                if (item.role_id == role) { 
                     return true;
                 }
             }

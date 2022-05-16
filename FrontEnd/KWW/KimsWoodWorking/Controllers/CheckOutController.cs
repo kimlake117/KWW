@@ -26,14 +26,14 @@ namespace KimsWoodWorking.Controllers
         }
 
         public ActionResult shipping_and_billing() {
-            CheckOutModel model = new CheckOutModel();
+            CheckOutViewModel model = new CheckOutViewModel();
             return View(model);
         }
 
         //this takes all the user info for an order and creates the order.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult shipping_and_billing(CheckOutModel com) {
+        public ActionResult shipping_and_billing(CheckOutViewModel com) {
 
             if (ModelState.IsValid) {
                 createOrder(com);

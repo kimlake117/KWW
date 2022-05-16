@@ -13,7 +13,7 @@ namespace KimsWoodWorking.BusinessLogic
     public static class OrderManager
     {
         //since SQlite3 does not have stored procedures everything needs to happen here.
-        public static int createOrder(CheckOutModel com)
+        public static int createOrder(CheckOutViewModel com)
         {
             //open connection
             using (IDbConnection conn = new SQLiteConnection(ConfigurationManager.ConnectionStrings["KWWDB"].ConnectionString))

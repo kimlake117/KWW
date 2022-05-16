@@ -13,7 +13,7 @@ namespace KimsWoodWorking.Controllers
         {
             if (GlobalVariables.currentUser.isSignedIn)
             {
-                if (userHasRole(GlobalVariables.currentUser,"Admin")) {
+                if (userHasRole(GlobalVariables.currentUser,2)) {
                     return View();
                 }
                 return View("UnauthorizedAccess");
