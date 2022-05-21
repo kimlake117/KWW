@@ -101,14 +101,15 @@ namespace KimsWoodWorking.Controllers
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 changeUserPassword(vm);
-                return View();
+                ViewBag.message = "Successfull password change for user: "+ getUserName(vm.selectedUserID);
+                return View("PostAdminAction");
             }
             else
             {
                 return View("UnauthorizedAccess");
             }
         }
-        public ActionResult ChangeUserRole()
+        public ActionResult editProduct()
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
@@ -119,10 +120,12 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
-        public ActionResult EditOrder()
+        public ActionResult EditOrder(int order_id)
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
+                EditOrderViewModel vm = new EditOrderViewModel();
+                vm.productsList = getOrderDetails(order_id);
                 return View();
             }
             else

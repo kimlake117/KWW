@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using KimsWoodWorking.Models.databaseModels;
 using static KimsWoodWorking.BusinessLogic.StateManager;
+using static KimsWoodWorking.BusinessLogic.MonthYearManager;
 
 namespace KimsWoodWorking.Models
 {
@@ -84,6 +85,9 @@ namespace KimsWoodWorking.Models
         [Required(ErrorMessage = "This Field is required.")]
         public int cc_cvc { get; set; }
 
-        
+        public List<MonthModel> months_list { get; set; } = fillMonthList();
+
+        public List<int> year_list { get; set; } = getYearList();
+
     }
 }

@@ -174,7 +174,7 @@ namespace KimsWoodWorking.Controllers
         public ActionResult ChangePassword(ModifyUserModel changes)
         {
                 UserAccountManager.UpdateUserPassword(changes.Password);
-                @ViewBag.Message = "Account Change was a success.";
+                @ViewBag.Message = "Password change was a success.";
                 return View("PostAccountChange");          
         }
         public ActionResult ChangeEmail()
@@ -194,7 +194,7 @@ namespace KimsWoodWorking.Controllers
         public ActionResult ChangeEmail(ModifyUserModel changes) {
 
             UserAccountManager.UpdateUserEmail(changes.Email);
-            @ViewBag.Message = "Account Change was a success.";
+            @ViewBag.Message = "Email change was a success.";
             return View("PostAccountChange");
         }     
     }

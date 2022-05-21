@@ -13,7 +13,7 @@
                 </li>
                 @if (Model.isAdmin)
                 {
-            <ul class="navbar-nav mb-2 mb-lg-0">
+            
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin
@@ -22,10 +22,10 @@
                         <li><a class="dropdown-item" href="@Url.Action("SearchOrder","Admin")">Search Orders</a></li>
                         <li><a class="dropdown-item" href="@Url.Action("SearchForUser","Admin")">Change User Password</a></li>
                         <li><a class="dropdown-item" href="@Url.Action("DeleteAccount","Admin")">Delete User Account</a></li>
-                        <li><a class="dropdown-item" href="@Url.Action("ChangeUserRole","Admin")">Change User Role</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("EditOrder","Admin")">Edit Product</a></li>
                     </ul>
                 </li>
-            </ul>
+            
 
                         }
                     </ul>

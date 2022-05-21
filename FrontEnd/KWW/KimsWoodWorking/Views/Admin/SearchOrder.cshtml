@@ -169,7 +169,7 @@
                 @Html.DisplayFor(modelItem => item.shipping_postal_code)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditOrder", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "EditOrder", new { order_id = item.parent_order_id})
             </td>
         </tr>
 

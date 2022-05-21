@@ -282,7 +282,7 @@ namespace KimsWoodWorking.BusinessLogic
                     sql += " substr(status_date,1,9) like @StatusDate and ";
                 }
                 if (orderSearched.order_status_description != null) {
-                    if (orderSearched.order_status_description != "Select Status")
+                    if (orderSearched.order_status_description != "")
                     {
                         sql += " order_status_description = @OrderStatusDescription and ";
                     }

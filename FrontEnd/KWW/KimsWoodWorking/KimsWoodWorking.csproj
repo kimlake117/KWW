@@ -185,6 +185,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\AdminManager.cs" />
+    <Compile Include="BusinessLogic\MonthYearManager.cs" />
     <Compile Include="BusinessLogic\OrderManager.cs" />
     <Compile Include="BusinessLogic\ProductManager.cs" />
     <Compile Include="BusinessLogic\StateManager.cs" />
@@ -206,7 +207,9 @@
     <Compile Include="Models\databaseModels\StateModelDB.cs" />
     <Compile Include="Models\databaseModels\UserCartDBModel.cs" />
     <Compile Include="Models\databaseModels\UserDBModel.cs" />
+    <Compile Include="Models\MonthModel.cs" />
     <Compile Include="Models\ViewModels\ChangeUserPWViewModel.cs" />
+    <Compile Include="Models\ViewModels\EditOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\NavBarViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOutViewModel.cs" />
     <Compile Include="Models\EditCartItemModel.cs" />
@@ -296,10 +299,11 @@
     <Content Include="Views\Home\NavBar.cshtml" />
     <Content Include="Views\Admin\DeleteAccount.cshtml" />
     <Content Include="Views\Admin\SearchForUser.cshtml" />
-    <Content Include="Views\Admin\ChangeUserRole.cshtml" />
     <Content Include="Views\Admin\EditOrder.cshtml" />
     <Content Include="Views\Admin\SearchOrder.cshtml" />
     <Content Include="Views\Admin\ChangeUserPw.cshtml" />
+    <Content Include="Views\Admin\editProduct.cshtml" />
+    <Content Include="Views\Admin\PostAdminAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

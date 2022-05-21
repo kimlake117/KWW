@@ -17,7 +17,7 @@ namespace KimsWoodWorking.Models.ViewModels
 
         private static OrderSummaryModel setUpOrder() {
             var newOrder= new OrderSummaryModel();
-            newOrder.order_status_description = "Select Status";
+            newOrder.order_status_description = "";
 
             return newOrder;
         }
