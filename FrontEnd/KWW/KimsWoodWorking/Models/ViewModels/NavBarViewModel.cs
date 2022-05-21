@@ -8,6 +8,6 @@ namespace KimsWoodWorking.Models
     public class NavBarViewModel
     {
         public bool isAdmin { get; set; }
-        public bool isSiteFocal { get; set; }
+        public bool isManager { get; set; }
     }
 }

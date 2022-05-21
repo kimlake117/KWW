@@ -6,6 +6,7 @@ using KimsWoodWorking.Models.databaseModels;
 using KimsWoodWorking.Models;
 using System.Security.Cryptography;
 using Dapper;
+using KimsWoodWorking.Models.ViewModels;
 
 namespace KimsWoodWorking.BusinessLogic
 {
@@ -15,9 +16,9 @@ namespace KimsWoodWorking.BusinessLogic
 
             UserDBModel userDBModel = new UserDBModel();
 
-            userDBModel.UserName = username;
-            userDBModel.Email = email;
-            userDBModel.Password = HashPassword(password);
+            userDBModel.user_name = username;
+            userDBModel.email = email;
+            userDBModel.password = HashPassword(password);
 
             string sql = @"insert into user(user_name,email,password)
                             values(@UserName, @Email, @Password)";
@@ -44,8 +45,8 @@ namespace KimsWoodWorking.BusinessLogic
         public static int UpdateUserEmail(string newEmail) {
             UserDBModel userDBModel =new UserDBModel();
 
-            userDBModel.UserName = GlobalVariables.currentUser.UserName;
-            userDBModel.Email = newEmail;
+            userDBModel.user_name = GlobalVariables.currentUser.UserName;
+            userDBModel.email = newEmail;
             string sql = "update user set email = @email where user_name = @UserName";
 
             return SqliteDataAccess.SaveData(sql, userDBModel);
@@ -54,8 +55,8 @@ namespace KimsWoodWorking.BusinessLogic
         public static int UpdateUserPassword(string newPassword) {
             UserDBModel userDBModel =new UserDBModel();
 
-            userDBModel.Password = HashPassword(newPassword);
-            userDBModel.UserName = GlobalVariables.currentUser.UserName;
+            userDBModel.password = HashPassword(newPassword);
+            userDBModel.user_name = GlobalVariables.currentUser.UserName;
 
             string sql = "update user set password = @Password where user_name = @UserName";
 
@@ -101,7 +102,7 @@ namespace KimsWoodWorking.BusinessLogic
                 return false;
             }
 
-            string storedHash = storedUser.First().Password;
+            string storedHash = storedUser.First().password;
             string submittedPWHash = HashPassword(user.Password);
 
             if (storedHash == submittedPWHash)
@@ -165,7 +166,7 @@ namespace KimsWoodWorking.BusinessLogic
                 return roles;
             }
         }
-        // 1 = User; 2 = Admin; 3 = Site Focal
+        // 1 = User; 2 = Admin; 3 = Manager
         public static bool userHasRole(UserModel user,int role) {
             foreach (var item in user.roleList) {
                 if (item.role_id == role) { 
@@ -173,6 +174,20 @@ namespace KimsWoodWorking.BusinessLogic
                 }
             }
             return false;
+        }
+        //returns a list of users based on the username entered by the Admin 
+        public static List<UserDBModel> getUserList(string userSearchedFor) {
+            List<UserDBModel> results = new List<UserDBModel>();
+
+            DynamicParameters p = new DynamicParameters();
+
+            p.Add("@UserName", "%"+userSearchedFor+"%");
+
+            string sql = "select user_id,user_name,email from user where upper(user_name) like upper(@UserName)";
+
+            results = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
+
+            return results;
         }
     }
 }

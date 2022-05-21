@@ -31,7 +31,7 @@ namespace KimsWoodWorking.Controllers
             //if the user has sitefocal role
             if (userHasRole(GlobalVariables.currentUser,3))
                 { 
-                navBarViewModel.isSiteFocal = true;
+                navBarViewModel.isManager = true;
             }
             return PartialView(navBarViewModel);
         }

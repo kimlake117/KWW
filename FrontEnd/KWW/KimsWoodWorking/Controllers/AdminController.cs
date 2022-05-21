@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using static KimsWoodWorking.BusinessLogic.UserAccountManager;
 using static KimsWoodWorking.BusinessLogic.OrderManager;
+using static KimsWoodWorking.BusinessLogic.AdminManager;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.Models.ViewModels;
 
@@ -40,10 +41,66 @@ namespace KimsWoodWorking.Controllers
             }
         }
 
-        public ActionResult ChangeUserPW()
+        public ActionResult SearchForUser()
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
+                ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
+                vm.UserList = getUserList(vm.usernameSearchedFor);
+                return View(vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SearchForUser(ChangeUserPWViewModel vm)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                vm.UserList = getUserList(vm.usernameSearchedFor);
+                return View(vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        public ActionResult SelectUser(int user_id)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
+
+                vm.selectedUserID = user_id;
+                ViewBag.selectedUserName = getUserName(user_id);
+
+                return View("ChangeUserPw",vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        public ActionResult ChangeUserPw() {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                return View();
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeUserPw(ChangeUserPWViewModel vm)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                changeUserPassword(vm);
                 return View();
             }
             else

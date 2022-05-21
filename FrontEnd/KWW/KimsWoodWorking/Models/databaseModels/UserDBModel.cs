@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace KimsWoodWorking.Models.databaseModels
 {
     public class UserDBModel
     {
+        [Display(Name = "User ID")]
         public int user_id { get; set; }
-
-        public String UserName { get; set; }
-
-        public String Password { get; set; }
-
-        public String Email { get; set; }
+        [Display(Name = "User Name")]
+        public String user_name { get; set; }
+        [Display(Name = "Password")]
+        public String password { get; set; }
+        [Display(Name = "Email")]
+        public String email { get; set; }
     }
 }

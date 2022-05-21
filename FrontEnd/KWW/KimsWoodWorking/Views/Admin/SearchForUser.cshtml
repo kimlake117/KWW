@@ -1,0 +1,52 @@
+﻿@model KimsWoodWorking.Models.ViewModels.ChangeUserPWViewModel
+
+@{
+    ViewBag.Title = "SearchForUser";
+}
+
+<h2>Change User Password</h2>
+<br />
+<h3>Search for user</h3>
+
+@using (Html.BeginForm("SearchForUser", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    @Html.DisplayNameFor(Model => Model.usernameSearchedFor)
+    @Html.EditorFor(model => model.usernameSearchedFor, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.usernameSearchedFor, "", new { @class = "text-danger" })
+    <br />
+    <input type="submit" value="Search" />
+}
+<br />
+<h3>Results</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.UserList.First().user_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.UserList.First().user_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.UserList.First().email)
+        </th>
+    </tr>
+    @foreach (var item in Model.UserList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "SelectUser", new { user_id = item.user_id })
+            </td>
+        </tr>
+    }
+</table>

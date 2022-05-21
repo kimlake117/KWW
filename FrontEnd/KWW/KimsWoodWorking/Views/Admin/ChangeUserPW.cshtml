@@ -1,7 +1,25 @@
-﻿
+﻿@model KimsWoodWorking.Models.ViewModels.ChangeUserPWViewModel
+
 @{
-    ViewBag.Title = "ChangeUserPW";
+    ViewBag.Title = "ChangeUserPw";
 }
+<br />
+<h3>Change password for user: @ViewBag.selectedUserName</h3>
+<br />
+@using (Html.BeginForm("ChangeUserPw", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
-<h2>ChangeUserPW</h2>
 
+    @Html.HiddenFor(model =>Model.selectedUserID)
+
+    @Html.DisplayNameFor(Model => Model.newPassword)
+    @Html.EditorFor(model => model.newPassword, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.newPassword, "", new { @class = "text-danger" })
+    <p></p>
+    @Html.DisplayNameFor(Model => Model.comfirmPassword)
+    @Html.EditorFor(model => model.comfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.comfirmPassword, "", new { @class = "text-danger" })
+    <br />
+    <input type="submit" value="Submit" />
+}

@@ -206,6 +206,7 @@
     <Compile Include="Models\databaseModels\StateModelDB.cs" />
     <Compile Include="Models\databaseModels\UserCartDBModel.cs" />
     <Compile Include="Models\databaseModels\UserDBModel.cs" />
+    <Compile Include="Models\ViewModels\ChangeUserPWViewModel.cs" />
     <Compile Include="Models\ViewModels\NavBarViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckOutViewModel.cs" />
     <Compile Include="Models\EditCartItemModel.cs" />
@@ -294,10 +295,11 @@
     <Content Include="Views\Admin\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Home\NavBar.cshtml" />
     <Content Include="Views\Admin\DeleteAccount.cshtml" />
-    <Content Include="Views\Admin\ChangeUserPW.cshtml" />
+    <Content Include="Views\Admin\SearchForUser.cshtml" />
     <Content Include="Views\Admin\ChangeUserRole.cshtml" />
     <Content Include="Views\Admin\EditOrder.cshtml" />
     <Content Include="Views\Admin\SearchOrder.cshtml" />
+    <Content Include="Views\Admin\ChangeUserPw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
