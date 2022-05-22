@@ -1,0 +1,17 @@
+﻿@model KimsWoodWorking.Models.ViewModels.ModifyAccountStatusViewModel
+@{
+    ViewBag.Title = "ConfirmReactivateAccount";
+}
+
+<h2>Confirm Reactivate Account</h2>
+
+<p>Are you sure you want to reactivate the account @ViewBag.selectedUserName?</p>
+
+@using (Html.BeginForm("ConfirmReactivateAccount", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => Model.selectedUserID)
+
+    <input type="submit" value="Reactivate" />
+}

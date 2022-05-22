@@ -1,13 +1,13 @@
 ﻿@model KimsWoodWorking.Models.ViewModels.ModifyAccountStatusViewModel
 @{
-    ViewBag.Title = "DeleteAccount";
+    ViewBag.Title = "ReactivateUserAccount";
 }
 
-<h2>Delete User Account</h2>
+<h2>Reactivate User Account</h2>
 <br />
 <h3>Search for user</h3>
 
-@using (Html.BeginForm("DeleteAccount", "Admin", FormMethod.Post))
+@using (Html.BeginForm("ReactivateAccount", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken();
     @Html.DisplayNameFor(Model => Model.usernameSearchedFor)
@@ -44,9 +44,11 @@
                 @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                @Html.ActionLink("Select", "SelectUserDUA", new { user_id = item.user_id } )
+                @Html.ActionLink("Select", "SelectUserRAUA", new { user_id = item.user_id })
             </td>
         </tr>
     }
 </table>
+
+
 

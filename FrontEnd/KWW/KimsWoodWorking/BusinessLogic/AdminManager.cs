@@ -55,5 +55,13 @@ namespace KimsWoodWorking.BusinessLogic
             return SqliteDataAccess.executeStatment(sql, p);
 
         }
+        public static int reactivateUserAccount(int user_id) { 
+            DynamicParameters p = new DynamicParameters();
+            p.Add("@UserID", user_id);
+
+            string sql = @"update user set active = 1 where user_id = @UserID";
+
+            return SqliteDataAccess.executeStatment(sql, p);
+        }
     }
 }

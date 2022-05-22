@@ -193,5 +193,19 @@ namespace KimsWoodWorking.BusinessLogic
 
             return results;
         }
+
+        public static List<UserDBModel> getDeactivatedUserList(string userSearchedFor)
+        {
+
+            DynamicParameters p = new DynamicParameters();
+
+            p.Add("@UserName", "%" + userSearchedFor + "%");
+
+            string sql = "select user_id,user_name,email,active from user where upper(user_name) like upper(@UserName) and active = 0";
+
+            List<UserDBModel> results = SqliteDataAccess.LoadData<UserDBModel>(sql, p);
+
+            return results;
+        }
     }
 }

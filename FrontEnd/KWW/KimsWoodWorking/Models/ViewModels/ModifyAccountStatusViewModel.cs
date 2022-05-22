@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KimsWoodWorking.Models.ViewModels
 {
-    public class DeleteUserAccountViewModel
+    public class ModifyAccountStatusViewModel
     {
         public List<UserDBModel> UserList { get; set; } = new List<UserDBModel>();
 

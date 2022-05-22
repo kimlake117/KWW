@@ -31,7 +31,7 @@ namespace KimsWoodWorking.Controllers
             }
         }
 
-        public ActionResult DeleteAccount(DeleteUserAccountViewModel vm) {
+        public ActionResult DeleteAccount(ModifyAccountStatusViewModel vm) {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 vm.UserList = getUserList(vm.usernameSearchedFor);
@@ -61,14 +61,14 @@ namespace KimsWoodWorking.Controllers
 
         public ActionResult ConfirmDeleteAccount(int user_id) { 
             ViewBag.user_name = getUserName(user_id);
-            DeleteUserAccountViewModel vm = new DeleteUserAccountViewModel { selectedUserID = user_id };
+            ModifyAccountStatusViewModel vm = new ModifyAccountStatusViewModel { selectedUserID = user_id };
 
             return View("ConfirmDeleteAccount",vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ConfirmDeleteAccount(DeleteUserAccountViewModel vm)
+        public ActionResult ConfirmDeleteAccount(ModifyAccountStatusViewModel vm)
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
@@ -82,6 +82,60 @@ namespace KimsWoodWorking.Controllers
             }
         }
 
+        public ActionResult ReactivateAccount(ModifyAccountStatusViewModel vm) {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                vm.UserList = getDeactivatedUserList(vm.usernameSearchedFor);
+                return View(vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        public ActionResult SelectUserRAUA(int user_id)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                ViewBag.selectedUserName = getUserName(user_id);
+                ViewBag.userID = user_id;
+
+                return ConfirmReactivateAccount(user_id);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        public ActionResult ConfirmReactivateAccount(int user_id)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                ViewBag.user_name = getUserName(user_id);
+                ModifyAccountStatusViewModel vm = new ModifyAccountStatusViewModel { selectedUserID = user_id };
+
+                return View("ConfirmReactivateAccount", vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmReactivateAccount(ModifyAccountStatusViewModel vm)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                reactivateUserAccount(vm.selectedUserID);
+                ViewBag.message = "User: " + getUserName(vm.selectedUserID) + " was reactivated";
+                return View("PostAdminAction");
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
         public ActionResult SearchForUser()
     {
         if (userHasRole(GlobalVariables.currentUser, 2))
