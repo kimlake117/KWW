@@ -189,19 +189,20 @@ namespace KimsWoodWorking.BusinessLogic
             List<queryResult> queryResults = SqliteDataAccess.LoadData<queryResult>(sql,p);
 
             //translate the query result list into ordersumarrymodel and add them to the final list
-            foreach (queryResult result in queryResults) { 
-                OrderSummaryModel orderSummaryModel = new OrderSummaryModel();
-
-                orderSummaryModel.parent_order_id = result.parent_order_id;
-                orderSummaryModel.total_order_cost = result.total_order_cost;
-                orderSummaryModel.order_date = result.order_date;
-                orderSummaryModel.order_status_description = result.order_status_description;
-                orderSummaryModel.status_date = result.status_date;
-                orderSummaryModel.shipping_name = result.shipping_name;
-                orderSummaryModel.shipping_street_address = result.shipping_street_address;
-                orderSummaryModel.shipping_city = result.shipping_city;
-                orderSummaryModel.shipping_state = result.state_name;
-                orderSummaryModel.shipping_postal_code = result.shipping_postal_code;
+            foreach (queryResult result in queryResults) {
+                OrderSummaryModel orderSummaryModel = new OrderSummaryModel
+                {
+                    parent_order_id = result.parent_order_id,
+                    total_order_cost = result.total_order_cost,
+                    order_date = result.order_date,
+                    order_status_description = result.order_status_description,
+                    status_date = result.status_date,
+                    shipping_name = result.shipping_name,
+                    shipping_street_address = result.shipping_street_address,
+                    shipping_city = result.shipping_city,
+                    shipping_state = result.state_name,
+                    shipping_postal_code = result.shipping_postal_code
+                };
 
                 orders.Add(orderSummaryModel);
             }
@@ -226,11 +227,12 @@ namespace KimsWoodWorking.BusinessLogic
 
             //translate, add to list, and return
             foreach (queryResult item in queryResults) {
-                OrderDetailItemModel orderDetailItemModel = new OrderDetailItemModel();
-
-                orderDetailItemModel.product_name = item.product_name;
-                orderDetailItemModel.product_price = item.product_price;
-                orderDetailItemModel.quantity = item.quantity;
+                OrderDetailItemModel orderDetailItemModel = new OrderDetailItemModel
+                {
+                    product_name = item.product_name,
+                    product_price = item.product_price,
+                    quantity = item.quantity
+                };
 
                 orderDetails.Add(orderDetailItemModel);
             }
@@ -318,20 +320,21 @@ namespace KimsWoodWorking.BusinessLogic
             //translate query results into OrderSummaryModel
             foreach (queryResult result in queryResults)
             {
-                OrderSummaryModel orderSummaryModel = new OrderSummaryModel();
-
-                orderSummaryModel.userID = result.user_id;
-                orderSummaryModel.parent_order_id = result.parent_order_id;
-                orderSummaryModel.total_order_cost = result.total_order_cost;
-                orderSummaryModel.order_date = result.order_date;
-                orderSummaryModel.order_status_description = result.order_status_description;
-                orderSummaryModel.status_date = result.status_date;
-                orderSummaryModel.shipping_name = result.shipping_name;
-                orderSummaryModel.shipping_street_address = result.shipping_street_address;
-                orderSummaryModel.shipping_city = result.shipping_city;
-                orderSummaryModel.shipping_state = result.state_name;
-                orderSummaryModel.shipping_postal_code = result.shipping_postal_code;
-                orderSummaryModel.userName = getUserName(result.user_id);
+                OrderSummaryModel orderSummaryModel = new OrderSummaryModel
+                {
+                    userID = result.user_id,
+                    parent_order_id = result.parent_order_id,
+                    total_order_cost = result.total_order_cost,
+                    order_date = result.order_date,
+                    order_status_description = result.order_status_description,
+                    status_date = result.status_date,
+                    shipping_name = result.shipping_name,
+                    shipping_street_address = result.shipping_street_address,
+                    shipping_city = result.shipping_city,
+                    shipping_state = result.state_name,
+                    shipping_postal_code = result.shipping_postal_code,
+                    userName = getUserName(result.user_id)
+                };
 
                 orders.Add(orderSummaryModel);
             }
@@ -340,13 +343,12 @@ namespace KimsWoodWorking.BusinessLogic
         }
 
         public static List<OrderStatusDBModel> getOrderStatusOptions() { 
-            List<OrderStatusDBModel> ordersStatusOptions = new List<OrderStatusDBModel>();
 
             DynamicParameters p = new DynamicParameters();
 
             string sql = "select * from order_status";
 
-            ordersStatusOptions = SqliteDataAccess.LoadData<OrderStatusDBModel>(sql, p);
+            List<OrderStatusDBModel> ordersStatusOptions = SqliteDataAccess.LoadData<OrderStatusDBModel>(sql, p);
 
             return ordersStatusOptions;
         }

@@ -12,84 +12,99 @@ namespace KimsWoodWorking.BusinessLogic
         {
             List<MonthModel> list = new List<MonthModel>();
 
-            MonthModel Jan = new MonthModel();
-            Jan.month_id = 1;
-            Jan.month_name = "01 - January";
+            MonthModel Jan = new MonthModel
+            {
+                month_id = 1,
+                month_name = "01 - January"
+            };
 
             list.Add(Jan);
 
-            MonthModel feb = new MonthModel();
-
-            feb.month_id = 2;
-            feb.month_name = "02 - February";
+            MonthModel feb = new MonthModel
+            {
+                month_id = 2,
+                month_name = "02 - February"
+            };
 
             list.Add(feb);
 
-            MonthModel march = new MonthModel();
-
-            march.month_id = 3;
-            march.month_name = "03 - March";
+            MonthModel march = new MonthModel
+            {
+                month_id = 3,
+                month_name = "03 - March"
+            };
 
             list.Add(march);
 
-            MonthModel april = new MonthModel();
-
-            april.month_id = 4;
-            april.month_name = "04 - April";
+            MonthModel april = new MonthModel
+            {
+                month_id = 4,
+                month_name = "04 - April"
+            };
 
             list.Add(april);
 
-            MonthModel may = new MonthModel();
-
-            may.month_id = 5;
-            may.month_name = "05 - May";
+            MonthModel may = new MonthModel
+            {
+                month_id = 5,
+                month_name = "05 - May"
+            };
 
             list.Add(may);
 
-            MonthModel june = new MonthModel();
+            MonthModel june = new MonthModel
+            {
+                month_id = 6,
+                month_name = "06 - June"
+            };
 
-            june.month_id = 6;
-            june.month_name = "06 - June";
+            list.Add(june);
 
-            MonthModel july = new MonthModel();
-
-            july.month_id = 7;
-            july.month_name = "07 - July";
+            MonthModel july = new MonthModel
+            {
+                month_id = 7,
+                month_name = "07 - July"
+            };
 
             list.Add(july);
 
-            MonthModel august = new MonthModel();
-
-            august.month_id = 8;
-            august.month_name = "08 - August";
+            MonthModel august = new MonthModel
+            {
+                month_id = 8,
+                month_name = "08 - August"
+            };
 
             list.Add(august);
 
-            MonthModel sept = new MonthModel();
-
-            sept.month_id = 9;
-            sept.month_name = "09 - September";
+            MonthModel sept = new MonthModel
+            {
+                month_id = 9,
+                month_name = "09 - September"
+            };
 
             list.Add(sept);
 
-            MonthModel oct = new MonthModel();
-
-            oct.month_id = 10;
-            oct.month_name = "10 - October";
+            MonthModel oct = new MonthModel
+            {
+                month_id = 10,
+                month_name = "10 - October"
+            };
 
             list.Add(oct);
 
-            MonthModel nov = new MonthModel();
-
-            nov.month_id = 11;
-            nov.month_name = "11 - November";
+            MonthModel nov = new MonthModel
+            {
+                month_id = 11,
+                month_name = "11 - November"
+            };
 
             list.Add(nov);
 
-            MonthModel dec = new MonthModel();
-
-            dec.month_id = 12;
-            dec.month_name = "12 - December";
+            MonthModel dec = new MonthModel
+            {
+                month_id = 12,
+                month_name = "12 - December"
+            };
 
             list.Add(dec);
 

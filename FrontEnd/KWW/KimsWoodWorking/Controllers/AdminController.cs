@@ -72,9 +72,10 @@ namespace KimsWoodWorking.Controllers
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
-                ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
-
-                vm.selectedUserID = user_id;
+                ChangeUserPWViewModel vm = new ChangeUserPWViewModel
+                {
+                    selectedUserID = user_id
+                };
                 ViewBag.selectedUserName = getUserName(user_id);
 
                 return View("ChangeUserPw",vm);
@@ -124,8 +125,10 @@ namespace KimsWoodWorking.Controllers
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
-                EditOrderViewModel vm = new EditOrderViewModel();
-                vm.productsList = getOrderDetails(order_id);
+                EditOrderViewModel vm = new EditOrderViewModel
+                {
+                    productsList = getOrderDetails(order_id)
+                };
                 return View();
             }
             else
@@ -154,11 +157,12 @@ namespace KimsWoodWorking.Controllers
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
-                SearchOrderViewModel viewModel = new SearchOrderViewModel();
+                SearchOrderViewModel viewModel = new SearchOrderViewModel
+                {
+                    Order = searchedOrder.Order,
 
-                viewModel.Order = searchedOrder.Order;
-
-                viewModel.OrderSummaries = searchOrders(searchedOrder.Order);
+                    OrderSummaries = searchOrders(searchedOrder.Order)
+                };
 
                 return View(viewModel);
             }

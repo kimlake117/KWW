@@ -73,13 +73,14 @@ namespace KimsWoodWorking.Controllers
         {
             if (ModelState.IsValid)
             {
-                int recordsCreated = CreateNewUser(newUser.UserName, newUser.Email, newUser.Password);
+                CreateNewUser(newUser.UserName, newUser.Email, newUser.Password);
             }
-            UserModel user = new UserModel();
-
-            user.UserName = newUser.UserName;
-            user.Email = newUser.Email;
-            user.Password = newUser.Password;
+            UserModel user = new UserModel
+            {
+                UserName = newUser.UserName,
+                Email = newUser.Email,
+                Password = newUser.Password
+            };
 
             LogIn(user);
 

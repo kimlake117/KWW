@@ -12,13 +12,14 @@ namespace KimsWoodWorking.BusinessLogic
 {
     public static class UserAccountManager
     {
-        public static int CreateNewUser(string username, string email, string password) { 
+        public static int CreateNewUser(string username, string email, string password) {
 
-            UserDBModel userDBModel = new UserDBModel();
-
-            userDBModel.user_name = username;
-            userDBModel.email = email;
-            userDBModel.password = HashPassword(password);
+            UserDBModel userDBModel = new UserDBModel
+            {
+                user_name = username,
+                email = email,
+                password = HashPassword(password)
+            };
 
             string sql = @"insert into user(user_name,email,password)
                             values(@UserName, @Email, @Password)";
@@ -26,8 +27,10 @@ namespace KimsWoodWorking.BusinessLogic
             int rowsInserted =  SqliteDataAccess.SaveData(sql, userDBModel);
 
             //need this to get the userid we just created.
-            UserModel userModel = new UserModel();
-            userModel.UserName = username;
+            UserModel userModel = new UserModel
+            {
+                UserName = username
+            };
 
             rowsInserted += insertUserRole(getUserId(userModel));
 
@@ -43,20 +46,23 @@ namespace KimsWoodWorking.BusinessLogic
             return SqliteDataAccess.executeStatment(sql, p);
         }
         public static int UpdateUserEmail(string newEmail) {
-            UserDBModel userDBModel =new UserDBModel();
+            UserDBModel userDBModel = new UserDBModel
+            {
+                user_name = GlobalVariables.currentUser.UserName,
+                email = newEmail
+            };
 
-            userDBModel.user_name = GlobalVariables.currentUser.UserName;
-            userDBModel.email = newEmail;
             string sql = "update user set email = @email where user_name = @UserName";
 
             return SqliteDataAccess.SaveData(sql, userDBModel);
         }
 
         public static int UpdateUserPassword(string newPassword) {
-            UserDBModel userDBModel =new UserDBModel();
-
-            userDBModel.password = HashPassword(newPassword);
-            userDBModel.user_name = GlobalVariables.currentUser.UserName;
+            UserDBModel userDBModel = new UserDBModel
+            {
+                password = HashPassword(newPassword),
+                user_name = GlobalVariables.currentUser.UserName
+            };
 
             string sql = "update user set password = @Password where user_name = @UserName";
 
@@ -177,7 +183,6 @@ namespace KimsWoodWorking.BusinessLogic
         }
         //returns a list of users based on the username entered by the Admin 
         public static List<UserDBModel> getUserList(string userSearchedFor) {
-            List<UserDBModel> results = new List<UserDBModel>();
 
             DynamicParameters p = new DynamicParameters();
 
@@ -185,7 +190,7 @@ namespace KimsWoodWorking.BusinessLogic
 
             string sql = "select user_id,user_name,email from user where upper(user_name) like upper(@UserName)";
 
-            results = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
+            List<UserDBModel> results = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
 
             return results;
         }

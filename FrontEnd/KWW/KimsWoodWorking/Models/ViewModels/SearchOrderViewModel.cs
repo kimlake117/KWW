@@ -16,8 +16,10 @@ namespace KimsWoodWorking.Models.ViewModels
         public List<OrderStatusDBModel> OrderStatusList { get; set; } = getOrderStatusOptions();
 
         private static OrderSummaryModel setUpOrder() {
-            var newOrder= new OrderSummaryModel();
-            newOrder.order_status_description = "";
+            OrderSummaryModel newOrder = new OrderSummaryModel
+            {
+                order_status_description = ""
+            };
 
             return newOrder;
         }
