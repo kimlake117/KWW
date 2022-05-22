@@ -1,0 +1,87 @@
+﻿@model KimsWoodWorking.Models.ViewModels.EditProductViewModel
+@{
+    ViewBag.Title = "SelectProduct";
+}
+
+<h2>Selected Product:</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SelectedProduct.product_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SelectedProduct.product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SelectedProduct.product_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SelectedProduct.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SelectedProduct.active)
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.SelectedProduct.product_id)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.SelectedProduct.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.SelectedProduct.product_price)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.SelectedProduct.description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.SelectedProduct.active)
+        </td>
+    </tr>
+</table>
+<br />
+
+<h3>Update Product:</h3>
+
+@using (Html.BeginForm("SelectProduct", "Admin", FormMethod.Post)) { 
+    @Html.AntiForgeryToken()
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.editedProduct.product_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.editedProduct.product_price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.editedProduct.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.editedProduct.active)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.HiddenFor(model => model.editedProduct.product_id)
+                @Html.EditorFor(model => model.editedProduct.product_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.editedProduct.product_name, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.editedProduct.product_price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.editedProduct.product_price, "enter '-1' to not change price", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.editedProduct.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.editedProduct.description, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(model => model.editedProduct.active, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.editedProduct.active, "enter '-1' to not change acitve status", new { @class = "text-danger" })
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Update" />
+}
+

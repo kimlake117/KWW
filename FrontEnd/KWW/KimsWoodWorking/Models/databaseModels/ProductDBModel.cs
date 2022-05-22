@@ -7,11 +7,11 @@ namespace KimsWoodWorking.Models.databaseModels
 {
     public class ProductDBModel
     {
-        public int product_id { get; set; }
-        public string product_name { get; set; }
-        public string photo { get; set; }
-        public double product_price { get; set; }
-        public string description { get; set; }
-        public int active { get; set; }
+        public int product_id { get; set; } = -1;
+        public string product_name { get; set; } = string.Empty;
+        public string photo { get; set; } = string.Empty;
+        public double product_price { get; set; } = -1;
+        public string description { get; set; } = string.Empty;
+        public int active { get; set; } = -1;
     }
 }

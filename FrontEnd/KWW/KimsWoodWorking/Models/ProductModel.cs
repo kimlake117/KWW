@@ -9,21 +9,22 @@ namespace KimsWoodWorking.Models
 {
     public class ProductModel
     {
-        public int product_id { get; set; }
+        public int product_id { get; set; } = -1;
 
         [Display(Name ="Product Name")]
-        public string product_name { get; set; }
+        public string product_name { get; set; } = String.Empty;
 
         //path to the photo
         [Display(Name = "Photo")]
-        public string photo { get; set; } = "";
+        public string photo { get; set; } = String.Empty;
 
         [Display(Name = "Product Price")]
-        public double product_price { get; set; }
+        public double product_price { get; set; } = -1;
 
         [Display(Name = "Description")]
-        public string description { get; set; }
+        public string description { get; set; } = string.Empty;
 
-        public int active { get; set; }
+        [Range (-1,1)]
+        public int active { get; set; } = -1;
     }
 }

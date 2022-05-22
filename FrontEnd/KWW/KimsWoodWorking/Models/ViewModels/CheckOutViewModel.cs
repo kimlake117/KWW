@@ -41,7 +41,7 @@ namespace KimsWoodWorking.Models
 
         [Display(Name = "Shipping Postal Code")]
         [DataType(DataType.PostalCode)]
-        [Range(10000,99999,ErrorMessage ="Please enter a valid postal code.")]
+        [Range(00001,99999,ErrorMessage ="Please enter a valid postal code.")]
         [Required(ErrorMessage = "This Field is required.")]
         public int shipping_postal_code { get; set; }
 
@@ -67,7 +67,7 @@ namespace KimsWoodWorking.Models
 
         [Display(Name = "Billing Postal Code")]
         [DataType(DataType.PostalCode)]
-        [Range(10000, 99999, ErrorMessage = "Please enter a valid postal code.")]
+        [Range(00001, 99999, ErrorMessage = "Please enter a valid postal code.")]
         [Required(ErrorMessage = "This Field is required.")]
         public int billing_postal_code { get; set; }
 

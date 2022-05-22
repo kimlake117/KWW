@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using static KimsWoodWorking.BusinessLogic.UserAccountManager;
 using static KimsWoodWorking.BusinessLogic.OrderManager;
 using static KimsWoodWorking.BusinessLogic.AdminManager;
+using static KimsWoodWorking.BusinessLogic.ProductManager;
 using KimsWoodWorking.Models;
 using KimsWoodWorking.Models.ViewModels;
 
@@ -19,7 +20,8 @@ namespace KimsWoodWorking.Controllers
             if (GlobalVariables.currentUser.isSignedIn)
             {
                 //if the user is an admin
-                if (userHasRole(GlobalVariables.currentUser,2)) {
+                if (userHasRole(GlobalVariables.currentUser, 2))
+                {
                     return View();
                 }
                 return View("UnauthorizedAccess");
@@ -30,15 +32,17 @@ namespace KimsWoodWorking.Controllers
                 return Redirect("~/Account/LogIn");
             }
         }
-
-        public ActionResult DeleteAccount(ModifyAccountStatusViewModel vm) {
+        /*-------------------------------Delete account----------------------------------------*/
+        public ActionResult DeleteAccount(ModifyAccountStatusViewModel vm)
+        {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 vm.UserList = getUserList(vm.usernameSearchedFor);
 
                 return View(vm);
             }
-            else {
+            else
+            {
                 return View("UnauthorizedAccess");
             }
         }
@@ -59,11 +63,12 @@ namespace KimsWoodWorking.Controllers
             }
         }
 
-        public ActionResult ConfirmDeleteAccount(int user_id) { 
+        public ActionResult ConfirmDeleteAccount(int user_id)
+        {
             ViewBag.user_name = getUserName(user_id);
             ModifyAccountStatusViewModel vm = new ModifyAccountStatusViewModel { selectedUserID = user_id };
 
-            return View("ConfirmDeleteAccount",vm);
+            return View("ConfirmDeleteAccount", vm);
         }
 
         [HttpPost]
@@ -81,8 +86,9 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
-
-        public ActionResult ReactivateAccount(ModifyAccountStatusViewModel vm) {
+        /*-------------------------------reactivate account----------------------------------------*/
+        public ActionResult ReactivateAccount(ModifyAccountStatusViewModel vm)
+        {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 vm.UserList = getDeactivatedUserList(vm.usernameSearchedFor);
@@ -136,19 +142,20 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
+        /*-------------------------------Change user Password----------------------------------------*/
         public ActionResult SearchForUser()
-    {
-        if (userHasRole(GlobalVariables.currentUser, 2))
         {
-            ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
-            vm.UserList = getUserList(vm.usernameSearchedFor);
-            return View(vm);
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
+                vm.UserList = getUserList(vm.usernameSearchedFor);
+                return View(vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
         }
-        else
-        {
-            return View("UnauthorizedAccess");
-        }
-    }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SearchForUser(ChangeUserPWViewModel vm)
@@ -173,14 +180,15 @@ namespace KimsWoodWorking.Controllers
                 };
                 ViewBag.selectedUserName = getUserName(user_id);
 
-                return View("ChangeUserPw",vm);
+                return View("ChangeUserPw", vm);
             }
             else
             {
                 return View("UnauthorizedAccess");
             }
         }
-        public ActionResult ChangeUserPw() {
+        public ActionResult ChangeUserPw()
+        {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 return View();
@@ -197,7 +205,7 @@ namespace KimsWoodWorking.Controllers
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 changeUserPassword(vm);
-                ViewBag.message = "Successfull password change for user: "+ getUserName(vm.selectedUserID);
+                ViewBag.message = "Successfull password change for user: " + getUserName(vm.selectedUserID);
                 return View("PostAdminAction");
             }
             else
@@ -205,17 +213,8 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
-        public ActionResult editProduct()
-        {
-            if (userHasRole(GlobalVariables.currentUser, 2))
-            {
-                return View();
-            }
-            else
-            {
-                return View("UnauthorizedAccess");
-            }
-        }
+
+        /*-------------------------------edit Orders----------------------------------------*/
         public ActionResult EditOrder(int order_id)
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
@@ -231,7 +230,9 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
-        public ActionResult ClearSearchOrders() {
+        /*-------------------------------Search for order----------------------------------------*/
+        public ActionResult ClearSearchOrders()
+        {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
                 SearchOrderViewModel searchOrder = new SearchOrderViewModel();
@@ -281,5 +282,63 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
+        /*-------------------------------Edit Product----------------------------------------*/
+        public ActionResult EditProduct(EditProductViewModel vm)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                vm.ProductsList = GetALLProductList(vm.ProductSearchedFor);
+
+                return View(vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        public ActionResult SelectProduct(int product_id)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+
+                EditProductViewModel vm = new EditProductViewModel();
+                vm.SelectedProduct = GetProductByID(product_id);
+                vm.editedProduct.product_id = product_id;
+                return View(vm);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SelectProduct(EditProductViewModel vm)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                int returnResult = updateProduct(vm);
+
+                if (returnResult == 0)
+                {
+                    ViewBag.message = "No changes made to product: "+getProductName(vm.editedProduct.product_id);
+                    return View("PostAdminAction");
+                }
+                if (returnResult == 1)
+                {
+                    ViewBag.message = "Success, changes made to product: " + getProductName(vm.editedProduct.product_id);
+                    return View("PostAdminAction");
+                }
+                else {
+                    ViewBag.message = "Error, no changes made to product: " + getProductName(vm.editedProduct.product_id);
+                    return View("PostAdminAction");
+                }
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
     }
 }
+   

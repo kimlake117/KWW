@@ -1,8 +1,65 @@
-﻿@model KimsWoodWorking.Models.ViewModels.EditOrderViewModel
+﻿@model KimsWoodWorking.Models.ViewModels.EditProductViewModel
 
 @{
     ViewBag.Title = "editProduct";
 }
 
 
+<h2>Edit Product</h2>
+<br />
+<h3>Search for product</h3>
 
+@using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken();
+    @Html.DisplayNameFor(Model => Model.ProductSearchedFor)
+    @Html.EditorFor(model => model.ProductSearchedFor, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.ProductSearchedFor, "", new { @class = "text-danger" })
+    <br />
+    <input type="submit" value="Search" />
+}
+<br />
+<h3>Results</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductsList.First().product_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductsList.First().product_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductsList.First().product_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductsList.First().description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(Model => Model.ProductsList.First().active)
+        </th>
+    </tr>
+    @foreach (var item in Model.ProductsList)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.product_price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.ActionLink("Select", "SelectProduct", new { product_id = item.product_id })
+        </td>
+    </tr>
+    }
+</table>
