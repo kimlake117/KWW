@@ -22,7 +22,13 @@ namespace KimsWoodWorking.Controllers
 
             ViewBag.TotalCartPrice = total;
 
-            return View(userCart);
+            if (total > 0)
+            {
+                return View(userCart);
+            }
+            else {
+                return Redirect("~/Account/ViewCart");
+            }
         }
 
         public ActionResult shipping_and_billing() {

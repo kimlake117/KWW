@@ -41,6 +41,7 @@ namespace KimsWoodWorking.Models
 
         [Display(Name = "Shipping Postal Code")]
         [DataType(DataType.PostalCode)]
+        [Range(10000,99999,ErrorMessage ="Please enter a valid postal code.")]
         [Required(ErrorMessage = "This Field is required.")]
         public int shipping_postal_code { get; set; }
 
@@ -66,10 +67,12 @@ namespace KimsWoodWorking.Models
 
         [Display(Name = "Billing Postal Code")]
         [DataType(DataType.PostalCode)]
+        [Range(10000, 99999, ErrorMessage = "Please enter a valid postal code.")]
         [Required(ErrorMessage = "This Field is required.")]
         public int billing_postal_code { get; set; }
 
         [Display(Name = "Credit Card Number")]
+        [Range(1000000000000000,9999999999999999,ErrorMessage ="Please enter a vaild card number.")]
         [Required(ErrorMessage = "This Field is required.")]
         public int cc_number { get; set; }
 
@@ -82,6 +85,7 @@ namespace KimsWoodWorking.Models
         public int cc_exp_year { get; set; }
 
         [Display(Name = "CCV")]
+        [Range(100,999,ErrorMessage = "Please enter a valid CVC number.")]
         [Required(ErrorMessage = "This Field is required.")]
         public int cc_cvc { get; set; }
 
