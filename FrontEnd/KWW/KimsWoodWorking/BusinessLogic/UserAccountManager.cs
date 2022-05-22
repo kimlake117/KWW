@@ -14,17 +14,16 @@ namespace KimsWoodWorking.BusinessLogic
     {
         public static int CreateNewUser(string username, string email, string password) {
 
-            UserDBModel userDBModel = new UserDBModel
-            {
-                user_name = username,
-                email = email,
-                password = HashPassword(password)
-            };
+            DynamicParameters p = new DynamicParameters();
 
-            string sql = @"insert into user(user_name,email,password)
-                            values(@UserName, @Email, @Password)";
+            p.Add("@UserName", username);
+            p.Add("@Email", email);
+            p.Add("@Password", HashPassword(password));
 
-            int rowsInserted =  SqliteDataAccess.SaveData(sql, userDBModel);
+            string sql = @"insert into user(user_name,email,password,Active)
+                            values(@UserName, @Email, @Password,1)";
+
+            int rowsInserted =  SqliteDataAccess.executeStatment(sql, p);
 
             //need this to get the userid we just created.
             UserModel userModel = new UserModel
@@ -188,7 +187,7 @@ namespace KimsWoodWorking.BusinessLogic
 
             p.Add("@UserName", "%"+userSearchedFor+"%");
 
-            string sql = "select user_id,user_name,email from user where upper(user_name) like upper(@UserName)";
+            string sql = "select user_id,user_name,email,active from user where upper(user_name) like upper(@UserName) and active = 1";
 
             List<UserDBModel> results = SqliteDataAccess.LoadData<UserDBModel>(sql,p);
 

@@ -251,12 +251,12 @@ namespace KimsWoodWorking.BusinessLogic
             p.Add("@OrderDate","%"+orderSearched.order_date+"%");
             p.Add("@OrderStatusDescription", orderSearched.order_status_description);
             p.Add("@StatusDate","%"+orderSearched.status_date+"%");
-            p.Add("@ShippingName",orderSearched.shipping_name);
-            p.Add("@ShippingSreetAddress", orderSearched.shipping_street_address);
-            p.Add("@ShippingCity", orderSearched.shipping_city);
+            p.Add("@ShippingName", "%" + orderSearched.shipping_name + "%");
+            p.Add("@ShippingSreetAddress", "%" + orderSearched.shipping_street_address + "%");
+            p.Add("@ShippingCity", "%" + orderSearched.shipping_city + "%");
             p.Add("@ShippingState", orderSearched.shipping_state);
             p.Add("@ShippingPostalCode", orderSearched.shipping_postal_code);
-            p.Add("@UserName", orderSearched.userName);
+            p.Add("@UserName", "%"+orderSearched.userName+"%");
 
             //the overall sql statment
             string sql = @"select * from parent_order po 
@@ -290,13 +290,13 @@ namespace KimsWoodWorking.BusinessLogic
                     }
                 }
                 if (orderSearched.shipping_name != null) {
-                    sql += " sd.shipping_name = @ShippingName and ";
+                    sql += " upper(sd.shipping_name) like upper(@ShippingName) and ";
                 }
                 if (orderSearched.shipping_street_address != null) {
-                    sql += " sd.shipping_street_address = @ShippingSreetAddress and ";
+                    sql += " upper(sd.shipping_street_address) like upper(@ShippingSreetAddress) and ";
                 }
                 if (orderSearched.shipping_city != null) {
-                    sql += " sd.shipping_city = @ShippingCity and ";
+                    sql += " upper(sd.shipping_city) like upper(@ShippingCity) and ";
                 }
                 if (orderSearched.shipping_state != null) {
                     if (orderSearched.shipping_state != "0")
@@ -308,7 +308,7 @@ namespace KimsWoodWorking.BusinessLogic
                     sql += " sd.shipping_postal_code = @ShippingPostalCode and ";
                 }
                 if (orderSearched.userName != null) {
-                    sql += " user.user_name = @UserName and ";
+                    sql += " upper(user.user_name) like upper(@UserName) and ";
                 }
                 //to end the statment so i can just add 'And' at the end of all the potenial searchable fields
                 sql += " 1=1 ";

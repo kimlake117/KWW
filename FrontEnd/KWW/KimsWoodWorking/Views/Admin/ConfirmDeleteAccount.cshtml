@@ -1,0 +1,17 @@
+﻿@model KimsWoodWorking.Models.ViewModels.DeleteUserAccountViewModel
+@{
+    ViewBag.Title = "ConfirmDeleteAccount";
+}
+
+<h2>ConfirmDeleteAccount</h2>
+
+<p>Are you sure you want to delete the account @ViewBag.selectedUserName?</p>
+
+@using (Html.BeginForm("ConfirmDeleteAccount", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => Model.selectedUserID)
+
+    <input type="submit" value="Delete" />
+}

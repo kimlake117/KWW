@@ -84,7 +84,9 @@ namespace KimsWoodWorking.Controllers
 
             LogIn(user);
 
-            return View("~/Views/Home/Index.cshtml");
+            ViewBag.user_name = user.UserName;
+
+            return View("~/Views/Account/PostAccountCreation.cshtml");
         }
         //**********************Cart and Orders********************************
         public ActionResult ViewCart()

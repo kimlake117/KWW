@@ -16,5 +16,7 @@ namespace KimsWoodWorking.Models.databaseModels
         public String password { get; set; }
         [Display(Name = "Email")]
         public String email { get; set; }
+
+        public int active { get; set; } = -1;
     }
 }

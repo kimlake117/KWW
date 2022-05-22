@@ -45,5 +45,15 @@ namespace KimsWoodWorking.BusinessLogic
                 return hash;
             }
         }
+
+        public static int deleteUserAccount(int user_id) { 
+            DynamicParameters p = new DynamicParameters();
+            p.Add("@UserID", user_id);
+
+            string sql = @"update user set active = 0 where user_id = @UserID";
+
+            return SqliteDataAccess.executeStatment(sql, p);
+
+        }
     }
 }

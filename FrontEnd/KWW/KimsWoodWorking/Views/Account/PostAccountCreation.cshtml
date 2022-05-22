@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "PostAccountCreation";
+}
+
+<h2>Thank you @ViewBag.user_name for creating an account to Kim's Woodworking!'</h2>
+<br />
+<input type="submit" onclick="location.href='@Url.Action("Index","Home")'" value="Home" />
+<input type="submit" onclick="location.href='@Url.Action("Index","Products")'" value="View Products" />
+

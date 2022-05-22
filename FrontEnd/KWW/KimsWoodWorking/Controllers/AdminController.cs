@@ -31,29 +31,70 @@ namespace KimsWoodWorking.Controllers
             }
         }
 
-        public ActionResult DeleteAccount() {
+        public ActionResult DeleteAccount(DeleteUserAccountViewModel vm) {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
-                return View();
+                vm.UserList = getUserList(vm.usernameSearchedFor);
+
+                return View(vm);
             }
             else {
                 return View("UnauthorizedAccess");
             }
         }
 
-        public ActionResult SearchForUser()
+
+        public ActionResult SelectUserDUA(int user_id)
         {
             if (userHasRole(GlobalVariables.currentUser, 2))
             {
-                ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
-                vm.UserList = getUserList(vm.usernameSearchedFor);
-                return View(vm);
+                ViewBag.selectedUserName = getUserName(user_id);
+                ViewBag.userID = user_id;
+
+                return ConfirmDeleteAccount(user_id);
             }
             else
             {
                 return View("UnauthorizedAccess");
             }
         }
+
+        public ActionResult ConfirmDeleteAccount(int user_id) { 
+            ViewBag.user_name = getUserName(user_id);
+            DeleteUserAccountViewModel vm = new DeleteUserAccountViewModel { selectedUserID = user_id };
+
+            return View("ConfirmDeleteAccount",vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfirmDeleteAccount(DeleteUserAccountViewModel vm)
+        {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                deleteUserAccount(vm.selectedUserID);
+                ViewBag.message = "User: " + getUserName(vm.selectedUserID) + " was deactivated";
+                return View("PostAdminAction");
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+
+        public ActionResult SearchForUser()
+    {
+        if (userHasRole(GlobalVariables.currentUser, 2))
+        {
+            ChangeUserPWViewModel vm = new ChangeUserPWViewModel();
+            vm.UserList = getUserList(vm.usernameSearchedFor);
+            return View(vm);
+        }
+        else
+        {
+            return View("UnauthorizedAccess");
+        }
+    }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SearchForUser(ChangeUserPWViewModel vm)
@@ -136,6 +177,21 @@ namespace KimsWoodWorking.Controllers
                 return View("UnauthorizedAccess");
             }
         }
+        public ActionResult ClearSearchOrders() {
+            if (userHasRole(GlobalVariables.currentUser, 2))
+            {
+                SearchOrderViewModel searchOrder = new SearchOrderViewModel();
+
+                searchOrder.OrderSummaries = searchOrders(searchOrder.Order);
+
+                return View("SearchOrder", searchOrder);
+            }
+            else
+            {
+                return View("UnauthorizedAccess");
+            }
+        }
+
         public ActionResult SearchOrder()
         {
             if (userHasRole(GlobalVariables.currentUser, 2))

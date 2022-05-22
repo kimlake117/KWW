@@ -89,6 +89,9 @@
     <input type="submit" value="Search" />
 }
 <br />
+<input type="submit" onclick="location.href='@Url.Action("ClearSearchOrders","Admin")'" value="Clear Form" />
+<br />
+<br />
 <h3>Results</h3>
 <br />
 <table class="table">
@@ -169,7 +172,7 @@
                 @Html.DisplayFor(modelItem => item.shipping_postal_code)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditOrder", new { order_id = item.parent_order_id})
+                @Html.ActionLink("Edit", "EditOrder", new { order_id = item.parent_order_id })
             </td>
         </tr>
 
