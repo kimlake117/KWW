@@ -128,6 +128,7 @@ C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\Fro
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\roslyn\VBCSCompiler.exe
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Antlr3.Runtime.dll
+C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Dapper.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\EntityFramework.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\EntityFramework.SqlServer.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Microsoft.AspNet.Identity.Core.dll
@@ -160,6 +161,7 @@ C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\Fro
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\System.Web.WebPages.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\System.Web.WebPages.Razor.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\WebGrease.dll
+C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Dapper.xml
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Microsoft.Owin.xml
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Microsoft.Owin.Host.SystemWeb.xml
@@ -193,5 +195,3 @@ C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\Fro
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\obj\Debug\KimsWoodWorking.csproj.CopyComplete
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\obj\Debug\KimsWoodWorking.dll
 C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\obj\Debug\KimsWoodWorking.pdb
-C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Dapper.dll
-C:\Users\Kim Lake\Documents\Job_Search_2022\Practice_Application\Source_Code\FrontEnd\KWW\KimsWoodWorking\bin\Dapper.xml

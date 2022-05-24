@@ -65,8 +65,9 @@ namespace KimsWoodWorking.BusinessLogic
                             p.Add("@ParentOrderID", parent_order_id);
                             p.Add("@ProductID", item.product_id);
                             p.Add("@Quantity", item.quantity);
+                            p.Add("@PriceAtPurchace", item.product_price);
 
-                            sql = "insert into order_detail(parent_order_id, product_id,quantity) values(@ParentOrderID,@ProductID,@Quantity)";
+                            sql = "insert into order_detail(parent_order_id, product_id,quantity,price_at_purchase) values(@ParentOrderID,@ProductID,@Quantity,@PriceAtPurchace)";
 
                             conn.Execute(sql,p);
                         }
@@ -218,7 +219,7 @@ namespace KimsWoodWorking.BusinessLogic
 
             p.Add("@ParentOrderID",PO);
 
-            string sql = @"select product_name,product_price,quantity
+            string sql = @"select product_name,price_at_purchase,quantity
                             from order_detail OD
                             inner join product P on p.product_id = OD.product_id
                             where parent_order_id = @ParentOrderID";
@@ -230,7 +231,7 @@ namespace KimsWoodWorking.BusinessLogic
                 OrderDetailItemModel orderDetailItemModel = new OrderDetailItemModel
                 {
                     product_name = item.product_name,
-                    product_price = item.product_price,
+                    product_price = item.price_at_purchase,
                     quantity = item.quantity
                 };
 
@@ -370,6 +371,7 @@ namespace KimsWoodWorking.BusinessLogic
             public int quantity { get; set; }
             public string product_name { get; set; }
             public int user_id { get; set; }
+            public int price_at_purchase { get; set; }
 
         }
     }

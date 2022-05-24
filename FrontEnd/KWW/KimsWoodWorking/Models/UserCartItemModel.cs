@@ -12,6 +12,7 @@ namespace KimsWoodWorking.Models
         public int user_Id { get; set; }
 
         [Display(Name = "Quantity")]
+        [Range(0,int.MaxValue,ErrorMessage ="Please enter a positive number.")]
         public int quantity { get; set; }
 
         public int product_id { get; set; }

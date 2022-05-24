@@ -80,16 +80,22 @@ namespace KimsWoodWorking.BusinessLogic
         }
 
         public static int updateCartItem(int user, int product, int quantity) {
+            if (quantity == 0)
+            {
+                return deleteCartItem(user, product);
+            }
+            else
+            {
+                var p = new DynamicParameters();
 
-            var p = new DynamicParameters();
+                p.Add("@Quantity", quantity);
+                p.Add("@UserID", user);
+                p.Add("@ProductID", product);
 
-            p.Add("@Quantity",quantity);
-            p.Add("@UserID", user);
-            p.Add("@ProductID", product);
+                string sql = @"update user_cart set quantity = @Quantity where user_id = @UserID and product_id = @ProductID";
 
-            string sql = @"update user_cart set quantity = @Quantity where user_id = @UserID and product_id = @ProductID";
-
-            return SqliteDataAccess.executeStatment(sql,p);
+                return SqliteDataAccess.executeStatment(sql, p);
+            }
         }
 
         public static void addProductToCart(int productID) {

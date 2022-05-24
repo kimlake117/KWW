@@ -74,7 +74,7 @@ namespace KimsWoodWorking.Models
         [Display(Name = "Credit Card Number")]
         [Range(1000000000000000,9999999999999999,ErrorMessage ="Please enter a vaild card number.")]
         [Required(ErrorMessage = "This Field is required.")]
-        public int cc_number { get; set; }
+        public long cc_number { get; set; }
 
         [Display(Name = "Experation Month")]
         [Required(ErrorMessage = "This Field is required.")]

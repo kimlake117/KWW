@@ -3,9 +3,9 @@
 @{
     ViewBag.Title = "ViewCart";
 }
-
-<h2>ViewCart</h2>
-
+<br />
+<h2>Cart for @GlobalVariables.currentUser.UserName</h2>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -33,14 +33,17 @@
                 </p>
             </td>
             <td>
-              @using (Html.BeginForm("updateCartItem", "Account", FormMethod.Post))
-              {
+                @using (Html.BeginForm("updateCartItem", "Account", FormMethod.Post))
+                {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => item.user_Id)
                     @Html.HiddenFor(model => item.product_id)
                     @Html.EditorFor(model => item.quantity)
+
                     <button type="submit">Update</button>
-              }
+
+                    @Html.ValidationMessageFor(model => item.quantity, "", new { @class = "text-danger" })
+                }
             </td>
             <td>
                 @Html.ActionLink("Delete", "DeleteCartItem", new { id = item.user_Id, product = item.product_id })

@@ -40,6 +40,7 @@ namespace KimsWoodWorking.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult shipping_and_billing(CheckOutViewModel com) {
+            
 
             if (ModelState.IsValid) {
                 createOrder(com);
